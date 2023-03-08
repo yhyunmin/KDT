@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>실습 테두리 그리기</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+      }
+      .right {
+        border-right-color: red;
+        border-right-width: 100px;
+        border-right-style: solid;
+      }
+      .left {
+        border-left-color: green;
+        border-left-width: 100px;
+        border-left-style: solid;
+      }
+      .top {
+        border-top-color: black;
+        border-top-style: double;
+        border-top-width: 10px;
+      }
+      .bottom {
+        border-bottom-color: black;
+        border-bottom-style: double;
+        border-bottom-width: 10px;
+      }
+      div.bottom {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+border 속성으로 테두리 적용하기 x 4개 ( 각각 클래스 부여 )
+border-width 속성으로 4방향 테두리 두꼐 변경하기
+border-style 속성으로 4방향 테두리 스타일 변경하기
+border-color 속성으로 4방향 테두리 색상 변경하기
+border-방향 속성으로 모든 방향의 테두리 스타일이나 div 완성하기
+-->
+    <div class="top bottom right left">div</div>
+  </body>
+</html>

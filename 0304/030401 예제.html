@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>max-height,min-height</title>
+    <style>
+      .parent {
+        height: 200px;
+        width: 500px;
+        background: red;
+      }
+
+      .parent .min {
+        min-width: 400px;
+        background-color: orange;
+        height: 100px;
+      }
+
+      .parent .max {
+        max-width: 400px;
+        background-color: aqua;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>max-width,min-width</h1>
+    <div class="parent">
+      <div class="max">max-height,max-width</div>
+      <div class="min">min-height,min-width</div>
+    </div>
+    <h2>단위</h2>
+    <div class="box box-px"></div>
+    <div class="box box-view"></div>
+    <div class="box box-per"></div>
+    <div class="rem">
+      rem
+      <div class="rem">
+        rem
+        <div class="rem">rem</div>
+      </div>
+    </div>
+    <div class="em">
+      em
+      <div class="em">
+        em
+        <div class="em">em</div>
+      </div>
+    </div>
+  </body>
+</html>

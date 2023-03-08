@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>실습 요소 사라지게 하기</title>
+
+    <style>
+      div.div {
+        width: 200px;
+        height: 200px;
+        background: blue;
+      }
+      div.div:hover {
+        /*display: none;*/
+        /*visibility: hidden;*/
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+div 요소의 크기를 200px 200px 배경 파란색으로 설정
+해당 div에 마우스가 올라가면 요소가 사라지도록 만들기
+-->
+
+    <div class="div"></div>
+  </body>
+</html>
