@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "allowJs": false
+    "allowJs": false,
+    "lib": ["ES2021.String"],
   }
 }

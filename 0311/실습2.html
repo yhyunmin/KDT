@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습2</title>
+  <style>
+    * {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    nav {
+      background-color: #845EC2;
+      line-height: 40px;
+    }
+
+    .a {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .logo {
+      text-transform: uppercase;
+      margin-left: 20px;
+      font-weight: 900;
+
+    }
+
+    .menu {
+      display: flex;
+      margin: 0;
+    }
+
+    .menu li {
+      margin-left: 20px;
+    }
+
+    .menu li:last-child {
+      margin-right: 20px;
+    }
+
+    .btn {
+      display: none;
+    }
+
+    @media screen and (max-width:992px) {
+      .a {
+        display: block;
+        position: relative;
+      }
+
+      .menu {
+        display: block;
+        background-color: #B39CD0;
+
+      }
+
+      .menu li {
+        color: black;
+      }
+
+      .btn {
+        display: block;
+        position: absolute;
+        top: 4px;
+        right: 20px;
+      }
+
+      .btn img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="a">
+      <h1 class="logo">Logo</h1>
+      <ul class="menu">
+        <li>메뉴1</li>
+        <li>메뉴2</li>
+        <li>메뉴3</li>
+        <li>메뉴4</li>
+      </ul>
+      <a href="#" class="btn">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Hamburger_icon.svg" alt="" />
+      </a>
+    </div>
+  </nav>
+
+</body>
+
+</html>
