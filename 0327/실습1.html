@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>실습1. Callback -> Promise</title>
+  </head>
+  <body>
+    <h1>콜백 함수로 이루어진 코드를 Promise 로 변경하기</h1>
+
+    <!--    <script src="">-->
+    <!--      function call(name, cb) {-->
+    <!--        setTimeout(function () {-->
+    <!--          console.log(name);-->
+    <!--          cb(name);-->
+    <!--        }, 1000);-->
+    <!--      }-->
+    <!--      function back(cb) {-->
+    <!--        setTimeout(function () {-->
+    <!--          console.log("back");-->
+    <!--          cb("back");-->
+    <!--        }, 1000);-->
+    <!--      }-->
+    <!--      function hell(cb) {-->
+    <!--        setTimeout(function () {-->
+    <!--          cb("callback hell");-->
+    <!--        }, 1000);-->
+    <!--      }-->
+    <!--    </script>-->
+
+    <!--    <script src="">-->
+    <!--      call("kim", function (name) {-->
+    <!--        console.log(name + "반가워");-->
+    <!--        back(function (txt) {-->
+    <!--          console.log(txt + "을 실행했구나");-->
+    <!--          hell(function (message) {-->
+    <!--            console.log("여기는" + message);-->
+    <!--          });-->
+    <!--        });-->
+    <!--      });-->
+    <!--    </script>-->
+    <!--    <script src="">-->
+    <!--      function call(name, cb) {-->
+    <!--        setTimeout(function () {-->
+    <!--          console.log(name);-->
+    <!--          cb(name);-->
+    <!--        }, 1000);-->
+    <!--      }-->
+    <!--      function back(cb) {-->
+    <!--        setTimeout(function () {-->
+    <!--          console.log("back");-->
+    <!--          cb("back");-->
+    <!--        }, 1000);-->
+    <!--      }-->
+    <!--      function hell(cb) {-->
+    <!--        setTimeout(function () {-->
+    <!--          cb("callback hell");-->
+    <!--        }, 1000);-->
+    <!--      }-->
+    <!--    </script>-->
+
+    <script>
+      function call(name) {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            console.log(name);
+            resolve(name);
+          }, 1000);
+        });
+      }
+
+      function back() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            console.log("back");
+            resolve("back");
+          }, 1000);
+        });
+      }
+
+      function hell() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            // console.log("callback hell");
+            resolve("callback hell");
+          }, 1000);
+        });
+      }
+
+      call("kim")
+        .then(function (result) {
+          console.log(result + "반가워");
+          return back(result);
+        })
+        .then(function (result) {
+          console.log(result + "를 실행했구나");
+          return hell(result);
+        })
+        .then(function (result) {
+          console.log("여기는" + result);
+        });
+    </script>
+  </body>
+</html>
