@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery cdn</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
+  <style>
+  </style>
+</head>
+
+<body>
+  <h1>jQUery</h1>
+  <div id="div1">안녕하세요</div>
+  <button type="button" onclick="submitJs()">js 버튼</button>
+  <button type="button" onclick=" submitJquery()">jQuery 버튼</button>
+  <script>
+
+    const jsBtn = document.querySelector('button')[0];
+    const div1 = document.querySelector('#div1');
+    function submitJs() {
+      div1.textContent = 'js'
+      div1.setAttribute('style', 'border:2px solid black');
+    }
+
+    function submitJquery() {
+      $('#div1').text('jQuery')
+      $('#div1').css('border', '3px dotted red'); // jQuery는 한번선택으로 전체적용이 됨.
+    }
+  </script>
+</body>
+
+</html>

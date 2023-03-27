@@ -1,0 +1,56 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>실습1. 이미지 바꾸기</title>
+
+  <!-- TODO: jQuery CDN 추가 -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js'
+    integrity='sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw=='
+    crossorigin='anonymous'></script>
+</head>
+
+<body>
+  <h1>이미지 바꾸기</h1>
+
+  <img class="fruit" src="./image/q.jpg" alt="" width="300" height="200" />
+  <br />
+  <button class="btn apple">사과</button>
+  <button class="btn bananas">바나나</button>
+  <button class="btn grapes">포도</button>
+  <button class="btn peaches">복숭아</button>
+
+  <script>
+    const fruits = ['apple', 'bananas', 'grapes', 'peaches']
+    fruits.forEach((v, i) => {
+      if ($($('.btn')[i]).hasClass(v)) {
+        $(`.${v}`).click(function () {
+          $('.fruit').attr('src', './image/' + `${v}` + '.jpg');
+        })
+      }
+    });
+    // TODO: 조건을 만족하는 jquery 코드 작성
+    // $('.btn.apple').click(function () {
+    //   $('.fruit').attr('src', './image/apple.jpg')
+    // })
+    // $('.btn.bananas').click(function () {
+    //   $('.fruit').attr('src', './image/bananas.jpg')
+    // })
+    // $('.btn.grapes').click(function () {
+    //   $('.fruit').attr('src', './image/grapes.jpg')
+    // })
+    // $('.btn.peaches').click(function () {
+    //   $('.fruit').attr('src', './image/peaches.jpg')
+    // })
+    // console.log($('.btn')); // 유사 배열
+    // jQuery 는 js와 다르게 배열 형태더라도 그냥 바로 이벤트 적용 가능!!
+
+  </script>
+</body>
+
+</html>

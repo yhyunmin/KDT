@@ -19,7 +19,7 @@
 
 ### classList.
 
-- class를 추가, 제거 조내하는지 체크
+- class를 추가, 제거 그리고 존재 하는지 체크
 - classList를 이용하여 CSS기능을 활용할 수 있다.
 
 ### setAttribute : html요소 속성 추가
@@ -29,13 +29,11 @@
 
 ### 다른 노드에 접근하기
 
-- children/ chi
+- children/ child
 
 ### createElement(html 요소)
 
 - 특정 html 태그를 생성한다.
 
 * 요소를 만들었으면 .append(), .prepend()
-* 삭제는 .remove()
-
-
+* 삭제는 .remove() ,
