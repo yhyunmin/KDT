@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <%- include('./includes/header.ejs') %>
+    <title>
+        <%- title; %>
+    </title>
+</head>
+<body>
+<h1 class="is-1 title"> <%- pageName %></h1>
+
+<form action="" name="register">
+    <div class="field">
+        <p class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="아이디를 입력하세요." name="id" value="banana">
+            <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+            <span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left">
+            <input class="input" type="password" placeholder="패스워드를 입력하세요." name="pw">
+            <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+        </p>
+    </div>
+    <br>
+    <button type="submit" class="button icon-text is-primary" id="submitBtn">로그인
+        <span class="icon">
+    <i class="fa fa-pencil-square-o"></i>
+    </span>
+    </button>
+    <div id="result"></div>
+</form>
+<script>
+  const form = document.forms["register"];
+  const axiosPost = async (id, pw) => {
+    const response = await axios.post("/axios", { data:id,pw });
+    const resultBox = document.querySelector("#result");
+    resultBox.style.fontWeight ='900';
+    resultBox.style.fontSize ='36px';
+    resultBox.style.color ='#602f6b';
+    return (resultBox.textContent = response.data.answer);
+  };
+  const btn = document.querySelector("#submitBtn");
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    axiosPost(form.id.value, form.pw.value);
+    form.id.value='';
+    form.pw.value='';
+  });
+
+</script>
+</body>
+</html>

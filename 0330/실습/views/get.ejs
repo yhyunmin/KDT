@@ -10,7 +10,7 @@
 <h1 class="title is-1">
     <%- pageName; %>
 </h1>
-<form action="/getResult" method="get">
+<form action="/getResult" name="register">
     <div class="field">
         <label class="label" for="name">이름</label>
         <div class="control has-icons-left has-icons-right">
@@ -95,18 +95,47 @@
     </div>
     <br>
 
-    <button type="submit" class="button icon-text is-success">회원가입
+    <button type="submit" class="button icon-text is-success" id="submitBtn">회원가입
         <span class="icon">
     <i class="fa fa-pencil-square-o"></i>
     </span>
     </button>
+    <div id="result"></div>
 </form>
+<script>
+  const btn = document.querySelector("#submitBtn");
+  const axiosGet = async () => {
+    const form = document.forms["register"];
+    const userInfo = {
+      name:form.name.value,
+      gender:form.gender.value,
+      birthValue:[form.birthYear.value, form.birthMonth.value, form.birthDay.value],
+      hobby: [],
+    };
+    try {
+      const resultBox = document.querySelector("#result");
+      const response = await axios.get("/axios", { params:userInfo });
+      const result = document.createElement("p");
+      console.log(userInfo.hobby);
+      result.textContent = `${ userInfo.name } ${ userInfo.birthValue[0] } ${ userInfo.birthValue[1] } ${ userInfo.birthValue[2] } ${ userInfo.gender } ${ userInfo.hobby }`;
+      resultBox.append(result);
+      result.style.color='#602f6b';
+      result.style.fontWeight='900'
+    } catch (e) {
+      console.log(e);
+    }
+
+  };
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    axiosGet();
+  });
+
+</script>
 <br>
 <br>
 <br>
-<hr>
-<button class="button icon-text " onclick="location.href = '/'">  <span class="icon">
-    <i class="fas fa-home"></i>
-  </span></button>
+
+<%- include('includes/footer.ejs') %>
 </body>
 </html>

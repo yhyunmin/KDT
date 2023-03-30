@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <%- include('./includes/header.ejs') %>
+    <title> <%- title; %></title>
+</head>
+<body>
+
+<h1 class="title is-1"> <%- pageName %></h1>
+
+<ul>
+    <li>이름 : <%- userInfo.name %></li>
+    <li>성별 : <%- userInfo.gender %></li>
+    <li>생일 : <%- userInfo.birthYear %> <%- userInfo.birthMonth %><%- userInfo.birthDay %></li>
+    <li>취미 : <%- userInfo.hobby %></li>
+    <% if ( userInfo.color ) { %>
+        <li>좋아하는 색상 : <%- userInfo.color %></li>
+        <li>좋아하는 숫자 : <%- userInfo.number %> </li>
+    <% } %>
+</ul>
+<hr>
+<button class="button icon-text " onclick="location.href = '/'">  <span class="icon">
+<i class="fas fa-home"></i>
+  </span></button>
+</body>
+</html>

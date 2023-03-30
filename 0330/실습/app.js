@@ -21,12 +21,19 @@ app.get("/get", (req, res) => {
     pageName: "실습1.get으로 정보받기",
   });
 });
+app.get("/login", (req, res) => {
+  res.render("login", {
+    title: "Axios 로그인 ",
+    pageName: "실습2.Axios Post 로그인",
+  });
+});
 app.get("/post", (req, res) => {
   res.render("post", {
     title: "POST 요청 폼 결과 확인하기",
     pageName: "실습2.Post으로 정보받기",
   });
 });
+
 app.get("/getResult", (req, res) => {
   res.render("result", {
     // post: false,
@@ -41,7 +48,6 @@ app.get("/getResult", (req, res) => {
 
     userInfo: req.query,
   });
-  res.send(req.query);
 });
 app.post("/postResult", (req, res) => {
   res.render("result", {
@@ -58,6 +64,21 @@ app.post("/postResult", (req, res) => {
     // number: req.body.number,
     userInfo: req.body,
   });
+});
+
+// axios 이용하여 데이터 받기
+app.post("/axios", (req, res) => {
+  console.log(req.body);
+  console.log(req.body.data);
+  console.log(req.body.pw);
+  const id = "banana";
+  const pw = "4321";
+  req.body.data === id && req.body.pw === pw
+    ? res.send({ answer: `${req.body.data}님 로그인 하였습니다.` })
+    : res.send({ answer: `로그인에 실패 하였습니다.` });
+});
+app.get("/axios", (req, res) => {
+  res.send(req.query);
 });
 
 app.listen(PORT, () => {
