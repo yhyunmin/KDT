@@ -39,20 +39,20 @@
 </form>
 <script>
   const form = document.forms["register"];
-  const axiosPost = async (id, pw) => {
-    const response = await axios.post("/axios", { data:id,pw });
+  const axiosPost = async () => {
+    const response = await axios.post("/axios",{id :form.id.value, pw :form.pw.value,})
     const resultBox = document.querySelector("#result");
-    resultBox.style.fontWeight ='900';
-    resultBox.style.fontSize ='36px';
-    resultBox.style.color ='#602f6b';
+    resultBox.style.fontWeight = "900";
+    resultBox.style.fontSize = "36px";
+    resultBox.style.color = "#602f6b";
     return (resultBox.textContent = response.data.answer);
   };
   const btn = document.querySelector("#submitBtn");
   btn.addEventListener("click", function(e) {
     e.preventDefault();
-    axiosPost(form.id.value, form.pw.value);
-    form.id.value='';
-    form.pw.value='';
+    axiosPost();
+    form.id.value = "";
+    form.pw.value = "";
   });
 
 </script>

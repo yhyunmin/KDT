@@ -69,12 +69,14 @@ app.post("/postResult", (req, res) => {
 // axios 이용하여 데이터 받기
 app.post("/axios", (req, res) => {
   console.log(req.body);
-  console.log(req.body.data);
-  console.log(req.body.pw);
+  console.log(req.body.data); // id 값
+  // const userID = req.body.data;
+  // const userID = req.body.pw;
+  console.log(req.body.pw); // pw 값
   const id = "banana";
   const pw = "4321";
-  req.body.data === id && req.body.pw === pw
-    ? res.send({ answer: `${req.body.data}님 로그인 하였습니다.` })
+  req.body.id === id && req.body.pw === pw
+    ? res.send({ answer: `${req.body.id}님 로그인 하였습니다.` })
     : res.send({ answer: `로그인에 실패 하였습니다.` });
 });
 app.get("/axios", (req, res) => {
