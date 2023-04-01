@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <%- include('./includes/header.ejs') %>
+    <title> <%- title; %></title>
+</head>
+<body>
+<h1 class="title is-2 m-3">NODE 실습</h1>
+<hr>
+<button class="button is-link is-light is-rounded m-3" onclick="location.href = '/get'">GET 으로 정보 받기</button>
+<button class="button is-rounded is-danger is-light m-3" onclick="location.href = '/post'">POST 으로 정보 받기</button>
+<button class="button is-rounded is-primary is-light m-3" onclick="location.href = '/login'">Login</button>
+<br>
+<button class="button is-rounded is-light m-3" onclick="location.href = '/fileUpload'">0401 파일 업로드</button>
+</body>
+</html>

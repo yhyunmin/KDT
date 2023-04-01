@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <%- include('./includes/header.ejs') %>
+    <title>
+        <%- title; %>
+    </title>
+    <style>
+      body {
+        background-color: rgba(0, 0, 0, 0.8);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 8px;
+        }
+
+      #container {
+        background: #fffff8;
+        border-radius: 20px;
+        width: 500px;
+        padding: 30px 30px;
+        }
+
+      img {
+        transform: translateX(50%);
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <% if (userImg) { %>
+        <img src="<%- userImg.path; %>" alt="프로필 이미지">
+    <% } %>
+
+    <!--    <img src="  userImg.path; " alt="프로필 이미지">-->
+    <h2>
+        <strong>ID:</strong> <%- userInfo.id; %>
+    </h2>
+    <h2>
+        <strong>PW :</strong><%- userInfo.pw; %>
+    </h2>
+    <h2>
+        <strong>Name :</strong> <%- userInfo.name; %>
+    </h2>
+    <h2>
+        <strong>Age:</strong> <%- userInfo.age; %>
+    </h2>
+    <br>
+</div>
+<script>
+
+  // 서버에서 받아온 객체를 ejs 사용안하고 자바스크립트 상에서 객체로 받아오기
+  <!--let data = '<%= JSON.stringify(userInfo); %>'-->
+  <!--console.log(data);-->
+  <!--data = data.replaceAll('&#34;', '\"');-->
+  <!--console.log(data);-->
+  <!--data = JSON.parse(data);-->
+  <!--console.log(data);-->
+
+  <!--const container = document.querySelector('#container')-->
+
+  <!--const userID = document.createElement("h1");-->
+  <!--userID.textcontent = data.id;-->
+  <!--userID.textcontent = 1;-->
+  <!--userInfos.append(userID);-->
+  <!--const userPW = document.createElement("h2");-->
+  <!--userPW.textcontent = data.pw;-->
+  <!--userPW.textcontent = 2;-->
+  <!--userInfos.append(userPW);-->
+  <!--const userName= document.createElement("h3");-->
+  <!--userName.textcontent = data.name;-->
+  <!--userInfos.append(userName);-->
+  <!--const userAge= document.createElement("h4");-->
+  <!--userAge.textContent = data.age;-->
+  <!--const userInfos = document.createElement("div");-->
+  <!--userInfos.append(userAge);-->
+  <!--container.append(userInfos);-->
+</script>
+</body>
+</html>

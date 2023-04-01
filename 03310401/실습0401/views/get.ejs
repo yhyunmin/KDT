@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <%- include('./includes/header.ejs') %>
+    <title>
+        <%- title; %>
+    </title>
+</head>
+<body>
+<h1 class="title is-1">
+    <%- pageName; %>
+</h1>
+<form action="/getResult" name="register">
+    <div class="field">
+        <label class="label" for="name">이름</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input is-success" type="text" id="name" value="이현민" name="name">
+            <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+            <span class="icon is-small is-right">
+      <i class="fas fa-check"></i>
+    </span>
+        </div>
+    </div>
+    <br>
+    <div class="field">
+        <h3 class="label"> 성별 </h3>
+        <div class="control">
+            <label for="male" class="radio">
+                <input type="radio" name="gender" value="male" id="male" checked>남자
+            </label>
+            <label for="female" class="radio">
+                <input type="radio" name="gender" value="female" id="female">여자
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <h3 class="label"> 생년월일</h3>
+        <div class="control">
+            <div class="select is-primary">
+                <label>
+                    <select name="birthYear">
+                        <option>2010년</option>
+                        <% for (let i = 2009;i > 1960;i--){ %>
+                            <option>
+                                <%= i %>
+                                년
+                            </option>
+                        <% } %>
+                    </select>
+                </label>
+            </div>
+            <div class="select is-primary">
+                <label>
+                    <select name="birthMonth">
+                        <option>1월</option>
+                        <% for (let i = 1;i < 13;i++){ %>
+                            <option>
+                                <%= i %>
+                                월
+                            </option>
+                        <% } %>
+                    </select>
+                </label>
+            </div>
+            <div class="select is-primary">
+                <label>
+                    <select name="birthDay">
+                        <option>1일</option>
+                        <% for (let i = 2;i < 32;i++){ %>
+                            <option>
+                                <%= i %>
+                                일
+                            </option>
+                        <% } %>
+                    </select>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <h3 class="label"> 관심사 </h3>
+        <div class="control">
+            <label for="travel">
+                <input type="checkbox" name="hobby" value="travel" id="travel" class="checkbox" checked>여행
+            </label>
+            <label for="fashion">
+                <input type="checkbox" name="hobby" value="fashion" id="fashion" class="checkbox">패션
+            </label>
+            <label for="food">
+                <input type="checkbox" name="hobby" value="food" id="food" class="checkbox">음식
+            </label>
+        </div>
+    </div>
+    <br>
+
+    <button type="submit" class="button icon-text is-success" id="submitBtn">회원가입
+        <span class="icon">
+    <i class="fa fa-pencil-square-o"></i>
+    </span>
+    </button>
+    <div id="result"></div>
+</form>
+<script>
+  const btn = document.querySelector("#submitBtn");
+  const axiosGet = async () => {
+    const form = document.forms["register"];
+    const userInfo = {
+      name:form.name.value,
+      gender:form.gender.value,
+      birthValue:[form.birthYear.value, form.birthMonth.value, form.birthDay.value],
+      hobby: [],
+    };
+    try {
+      const resultBox = document.querySelector("#result");
+      const response = await axios.get("/axios", { params:userInfo });
+      const result = document.createElement("p");
+      console.log(userInfo.hobby);
+      result.textContent = `${ userInfo.name } ${ userInfo.birthValue[0] } ${ userInfo.birthValue[1] } ${ userInfo.birthValue[2] } ${ userInfo.gender } ${ userInfo.hobby }`;
+      resultBox.append(result);
+      result.style.color='#602f6b';
+      result.style.fontWeight='900'
+    } catch (e) {
+      console.log(e);
+    }
+
+  };
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    axiosGet();
+  });
+
+</script>
+<br>
+<br>
+<br>
+
+<%- include('includes/footer.ejs') %>
+</body>
+</html>
