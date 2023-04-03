@@ -50,7 +50,6 @@ app.get("/getResult", (req, res) => {
     // birthMonth: req.query.birthMonth,
     // birthDay: req.query.birthDay,
     // hobby: req.query.hobby,
-
     userInfo:req.query
   });
 });

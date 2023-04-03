@@ -44,7 +44,7 @@
                         <option>2010년</option>
                         <% for (let i = 2009;i > 1960;i--){ %>
                             <option>
-                                <%= i %>
+                                <%= i; %>
                                 년
                             </option>
                         <% } %>
@@ -57,7 +57,7 @@
                         <option>1월</option>
                         <% for (let i = 1;i < 13;i++){ %>
                             <option>
-                                <%= i %>
+                                <%= i; %>
                                 월
                             </option>
                         <% } %>
@@ -70,7 +70,7 @@
                         <option>1일</option>
                         <% for (let i = 2;i < 32;i++){ %>
                             <option>
-                                <%= i %>
+                                <%= i; %>
                                 일
                             </option>
                         <% } %>
@@ -83,13 +83,13 @@
         <h3 class="label"> 관심사 </h3>
         <div class="control">
             <label for="travel">
-                <input type="checkbox" name="hobby" value="travel" id="travel" class="checkbox" checked>여행
+                <input type="checkbox" name="hobby" value="여행" id="travel" class="checkbox" checked>여행
             </label>
             <label for="fashion">
-                <input type="checkbox" name="hobby" value="fashion" id="fashion" class="checkbox">패션
+                <input type="checkbox" name="hobby" value="패션" id="fashion" class="checkbox">패션
             </label>
             <label for="food">
-                <input type="checkbox" name="hobby" value="food" id="food" class="checkbox">음식
+                <input type="checkbox" name="hobby" value="요리" id="food" class="checkbox">음식
             </label>
         </div>
     </div>
@@ -106,21 +106,30 @@
   const btn = document.querySelector("#submitBtn");
   const axiosGet = async () => {
     const form = document.forms["register"];
+    const checked = form.querySelectorAll('input[name=hobby]:checked');
     const userInfo = {
       name:form.name.value,
       gender:form.gender.value,
       birthValue:[form.birthYear.value, form.birthMonth.value, form.birthDay.value],
-      hobby: [],
+      hobby:[...checked].map(input => input.value)
+      // hobby:Array.from(document.querySelectorAll('input[name=hobby]:checked'))
+      // .map(input => input.value),
+      // hobby:Array.from(document.querySelectorAll('input[name=hobby]'))
+      // .filter(hobby => hobby.checked)
+      // .map(input => input.value),
+      // checkbox 인풋들을 모아서 -> checked인지 확인 = > 모은 배열 아이템들을 각 아이템의 value로 변견
+      // checkbox들을 모아서 변수선언(NodeList) => 배열화위해 Spread사용 = > map 사용
     };
     try {
       const resultBox = document.querySelector("#result");
       const response = await axios.get("/axios", { params:userInfo });
       const result = document.createElement("p");
+      console.log(userInfo);
       console.log(userInfo.hobby);
       result.textContent = `${ userInfo.name } ${ userInfo.birthValue[0] } ${ userInfo.birthValue[1] } ${ userInfo.birthValue[2] } ${ userInfo.gender } ${ userInfo.hobby }`;
       resultBox.append(result);
-      result.style.color='#602f6b';
-      result.style.fontWeight='900'
+      result.style.color = '#602f6b';
+      result.style.fontWeight = '900'
     } catch (e) {
       console.log(e);
     }
