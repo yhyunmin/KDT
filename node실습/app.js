@@ -71,6 +71,10 @@ app.post("/postResult", (req, res) => {
   });
 });
 
+// 새로운 페이지 get.post 메서드 생성하기
+// ejs 화면 띄우기 : render,{객체로 데이터 보내기}
+// 데이터만 보내기 : send // 동적페이지 작성 가능
+
 // axios 이용하여 데이터 받기
 app.post("/axios", (req, res) => {
   console.log(req.body);

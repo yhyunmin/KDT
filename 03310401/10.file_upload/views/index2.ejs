@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>파일 업로드</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>파일 업로드 배워보자 ! </h1>
+
+<!--<h2>1 input 1 file upload</h2>-->
+<!--<form action="/uploads" method="post" enctype="multipart/form-data">-->
+<!--    <input type="file" name="userfile"> <br>-->
+<!--    <input type="text" name="title"> <br> <br>-->
+<!--    <button type="submit">업로드</button>-->
+<!--</form>-->
+
+<!--<h2>1 input many files upload</h2>-->
+<!--&lt;!&ndash;form /action 도 '/'를 통해 길게 작성할 수 있음&ndash;&gt;-->
+<!--<form action="/uploads/array" method="post" enctype="multipart/form-data">-->
+<!--    <input type="file" name="userfile" multiple> <br>-->
+<!--    <input type="text" name="title"> <br> <br>-->
+<!--    <button type="submit">업로드</button>-->
+<!--</form>-->
+<!--<h2>many inputs file upload each</h2>-->
+<!--&lt;!&ndash;form /action 도 '/'를 통해 길게 작성할 수 있음&ndash;&gt;-->
+<!--<form action="/uploads/fields" method="post" enctype="multipart/form-data">-->
+<!--    <input type="file" name="userfile1"> <br>-->
+<!--    <input type="text" name="title1"> <br>-->
+<!--    <input type="file" name="userfile2"> <br>-->
+<!--    <input type="text" name="title2"> <br> <br>-->
+<!--    <button type="submit">업로드</button>-->
+<!--</form>-->
+<h2>동적 파일 업로드</h2>
+<p>페이지 변환하지 않고, 현재 페이지에서 파일 업로드 결과 확인하기 ~ !</p>
+<input type="file" name="dynamic-userfile" id="dynamic-userfile"><br>
+<button type="button" onclick="fileUpload();">업로드</button>
+<br>
+<!-- 업로드할 파일을 보여줄 이미지 태그-->
+<div id="result"></div>
+<script>
+  function fileUpload () {
+    const formData = new FormData();
+    // FormData 란? form 태그의 데이터를 동적으로 제어할 수 있는 기능 / 보통 axios/ajax 와 함께 사용됨
+    // 페이지 전환 없이 "현재 페이지" 에서 동적으로 파일업로드 하고 싶을 때 사용함.
+    const fileInput = document.getElementById('dynamic-userfile');
+
+    //formData.append(key,value)
+    formData.append('dynamic-userfile', fileInput.files[0]);
+
+    axios.post(
+      'dynamicFile',
+      formData,
+      { 'Content-Type':'multipart/form - data' }
+    )
+    .then((response) => {
+      console.log(response);
+      console.log(response.data.path);
+      const result = document.querySelector('#result')
+      const img = document.createElement('img')
+      img.setAttribute('src', response.data.path)
+      result.append(img);
+    })
+  }
+
+  //   axios({
+  //     url:'/dynamicFile',
+  //     method:'POST',
+  //     data:formData,
+  //     headers:{
+  //       'Content-Type':'multipart/form-data',
+  //     }
+  //   })
+  // }
+</script>
+</body>
+</html>

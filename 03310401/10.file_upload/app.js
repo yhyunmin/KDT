@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 app.use("/uploads", express.static(`${ __dirname }/uploads`));
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index2");
 });
 
 // single() : 하나의 파일 업로드 할 때
@@ -74,12 +74,20 @@ app.post("/uploads/array", uploadDetail.array("userfile"), (req, res) => {
 // });
 app.post(
   "/uploads/fields",
-  uploadDetail.fields([{ name: 'userfile1' }, { name:'userfile2' }]),
+  uploadDetail.fields([{ name:"userfile1" }, { name:"userfile2" }]),
   (req, res) => {
-    console.log(req.files);
-    console.log(req.body);
-    res.send('each file uploaded');
+    // console.log(req.files);
+    // console.log(req.body);
+    res.send("each file uploaded");
   });
+app.post(
+  "/dynamicFile",
+  uploadDetail.single("dynamic-userfile"),
+  (req, res) => {
+    // console.log(req.file);
+    res.send(req.file);
+  }
+);
 app.listen(PORT, () => {
   console.log("서버가열렸서요");
   console.log(`http://localhost:${ PORT }`);
