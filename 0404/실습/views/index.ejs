@@ -48,8 +48,12 @@
     const resultBox = document.querySelector("#result");
     resultBox.style.fontWeight = "900";
     resultBox.style.fontSize = "36px";
-    resultBox.style.color = "#602f6b";
-    return (resultBox.textContent = response.data.answer);
+    // resultBox.style.color = "#602f6b";
+    return (
+      response.data.correct ? resultBox.style.color = 'blue' : resultBox.style.color = 'red',
+        resultBox.textContent = response.data.answer
+    )
+      ;
   };
   const btn = document.querySelector("#submitBtn");
   btn.addEventListener("click", function(e) {
