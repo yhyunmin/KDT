@@ -58,6 +58,7 @@ app.get("/comments", (req, res) => {
 // /comment/6/홍길동
 // req.params { id: 6,name:"홍길동"} // req.params.id => 6
 app.get("/comment/:id", (req, res) => {
+  // :id 는 변수명이다.
   console.log(req.params); // 라우트 매개변수에 대한 정보 담겨 있음
   console.log(req.params.id); // id 고유 값
 
