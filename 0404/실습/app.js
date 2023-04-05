@@ -8,14 +8,15 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 
-
 const indexRouter = require("./routes");
+const userRouter = require("/routes/User");
 
-app.use("/", indexRouter); // 도메인뒤에 모든 경로를 indexRouter 로 보낸다.
+// app.use("/", indexRouter);
+// 도메인뒤에 모든 경로를 indexRouter 로 보낸다.
 // app.get("*", (req, res) => {
 //   res.render("404");
 // });
-
+app.use("/", userRouter);
 app.listen(PORT, () => {
   console.log(`http://localhost:${ PORT }`);
 });
