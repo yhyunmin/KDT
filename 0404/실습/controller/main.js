@@ -18,7 +18,9 @@ exports.checkID = (req, res) => {
 const array = []; // 유저 정보를 저장할 배열
 const arrayIDs = []; // 유저 아이디만 저장할 배열
 const userIds = [];
+// 가져온 텍스트
 const users = user.users.split("\n");
+// 아이디와 패스워드 userInfos id pw name
 const userInfos = users.map((user) => {
   const [id, pw, name] = user.split("//");
   return {
@@ -27,16 +29,23 @@ const userInfos = users.map((user) => {
     name
   }; // ?
 });
-for (let u of users) {
-  console.log(users);
-  array.push({
-    realId:u.split("//")[0], // apple -> banana -> happy
-    realPw:u.split("//")[1], // 1234 -> 4321 -> qwer1234
-    name:u.split("//")[2] // 사과사과 -> 바나나나나 -> 해피해피
-  });
-  arrayIDs.push(u.split("//")[0]); // apple -> banana -> happy
+for (let user of userInfos) {
+  userIds.push(user.id); //?
+
 }
-console.log(array);
+console.log(userIds);
+// ?
+
+// for (let u of users) {
+//   console.log(users);
+//   array.push({
+//     realId:u.split("//")[0], // apple -> banana -> happy
+//     realPw:u.split("//")[1], // 1234 -> 4321 -> qwer1234
+//     name:u.split("//")[2] // 사과사과 -> 바나나나나 -> 해피해피
+//   });
+//   arrayIDs.push(u.split("//")[0]); // apple -> banana -> happy
+// }
+// console.log(array);
 // [
 //   { realId: 'apple', realPw: '1234', name: '사과사과' },
 //   { realId: 'banana', realPw: '4321', name: '바나나나나' },
@@ -47,25 +56,31 @@ console.log(array);
 // 만약에 없다면 -1 반환
 
 exports.userCheckID = (req, res) => {
-  for (let user of userInfos) {
-    userIds.push(user.id); //?
-  }// ?
+
+// 아이디와 패스워드 userInfos id pw name
   const idx = userIds.indexOf(req.body.id);
+  const idx2 = userIds.id.indexOf('banana'); //?
   if (idx >= 0) {
     //아이디 있음
     console.log(userIds[idx]);
     if (userInfos[idx].pw === req.body.pw) {
       // 아이디 있고 , 비번 맞음
       res.send({
-        isLogin:true,
-        userInfo:userInfos[idx]
+        correct:true,
+        answer:`${ userInfos[idx].name }님 로그인 하였습니다.`
       });
     } else {
-      res.send({ isSuccess:false });
+      res.send({
+        correct:false,
+        answer:`로그인에 실패 하였습니다.`
+      });
     }
   } else {
     console.log("아이디 없음");
-    res.send({ isSuccess:false });
+    res.send({
+      correct:false,
+      answer:`로그인에 실패 하였습니다.`
+    });
   }
 
   // 코드 다시 작성해볼것

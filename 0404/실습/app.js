@@ -8,15 +8,18 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 
-const indexRouter = require("./routes");
-const userRouter = require("/routes/User");
 
-// app.use("/", indexRouter);
 // 도메인뒤에 모든 경로를 indexRouter 로 보낸다.
 // app.get("*", (req, res) => {
 //   res.render("404");
 // });
-app.use("/", userRouter);
+// app.use("/", userRouter);
+const indexRouter = require("./routes");
+app.use("/", indexRouter);
+app.get("*", (req, res) => {
+  // res.send('404 Error! 잘못된 주소 형식입니다.');
+  res.render("404");
+});
 app.listen(PORT, () => {
   console.log(`http://localhost:${ PORT }`);
 });

@@ -24,3 +24,20 @@
 
 ## Node.js 에서 MVC 구조
 ![img_1.png](img_1.png)
+
+## 폴더구조
+* controller 폴더 : View와 Model연결하는부분
+  (Cmain.js)
+* model 폴더 : 데이터 처리하는 부분
+  (Comment.js)
+* routes 폴더 : 경로 설정하는 부분
+  (index.js)
+* views 폴더 : UI 관련 처리
+
+
+
+
+### req.params 
+
+* 라우터의 매개변수
+예를 들어 /:id/:name 경로가 있으면 ":id"속성과 ":name"속성을 req.params.id, req.params.name 으로 사용할 수 있다.

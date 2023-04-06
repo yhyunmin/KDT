@@ -39,12 +39,13 @@
             <td><%= data[i].name %></td>
             <td><%= data[i].comment %></td>
             <td>
-                <button type="button">
+                <button type="button" onclick="editVisitor('<%= data[i].id %>')">
                     수정
                 </button>
             </td>
             <td>
-                <button type="button">
+                <!--                <button class="button" type="button" onclick="deleteVisitor('<%= i %>',this,'<%= data[i].id %>')">-->
+                <button class="button" type="button" onclick="deleteVisitor(this,'<%= data[i].id %>')">
                     삭제
                 </button>
             </td>
@@ -54,6 +55,67 @@
 </table>
 <script>
   const tbody = document.querySelector("tbody");
+  const buttonGroup = document.querySelector("#button-group");
+  // 1) 테이블 [수정] 버튼 클릭
+  // form input 값 넣기
+  // 변경 / 취소 버튼 보여주기
+  function editVisitor (id) {
+    console.log(id);
+    axios.get("/visitor/get", { params:{ id:id } })
+    .then((res) => {
+      console.log(res);
+      const form = document.forms['visitor-form'];
+      form.name.value = res.data.name; // input[name='name']에 value 설정
+      form.comment.value = res.data.comment; // input[name='comment']에 value 설정
+      buttonGroup.innerHTML = `
+      <button type="button" onclick="editDo(${res.data.id})">변경</button>
+      <button type="button">취소</button>
+      `;
+    });
+  }
+  // (2) [변경] 버튼 클릭시
+  // - 데이터 수정 작업
+  function editDo(id) {
+    const form = document.forms['visitor-form'];
+
+    axios({
+      method: 'PATCH',
+      url: '/visitor/edit',
+      data: {
+        id: id,
+        name: form.name.value,
+        comment: form.comment.value
+      }
+    }).then((res) => {
+      console.log(res.data);
+    })
+  }
+
+  // function deleteVisitor (index, obj, id) {
+  function deleteVisitor (obj, id) {
+    console.log(obj);
+    console.log(id);
+    // console.log(document.querySelectorAll(".button")[index]);
+    // const obj = document.querySelectorAll(".button")[index];
+    if (!confirm("정말 삭제하시겠습니까 ?")) { //!false = true ( 취소 버튼을 누르면 )
+      return;
+    } else {
+      //confirm 에서 [ 확인 버튼을 누르면 실행될 명령 ]
+      axios.delete("/visitor/delete", {
+        data:{
+          id:id // 매개변수로 받고 있는 아이디
+        }
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log(obj);
+        // obj.parentElement.parentElement.remove();
+        obj.closest("tr")
+        .remove();
+
+      });
+    }
+  }
 
   function createVisitor () {
     const form = document.forms["visitor-form"];
@@ -72,8 +134,8 @@
             <td>${ res.data.id }</td>
             <td>${ res.data.name }</td>
             <td>${ res.data.comment }</td>
-            <td><button type="button">수정</button></td>
-            <td><button type="button">삭제</button></td>
+            <td><button type="button" onclick="editVisitor(${ res.data.id })">수정</button></td>
+            <td><button type="button" onclick="deleteVisitor(this,${ res.data.id }})">삭제</button></td>
           </tr>`;
       // DOM 트리 element.insertAdjacentHTML(position, text);
       //   position 은 아래에 있는 단어만 사용 가능 : beforebegin,afterbegin,beforeend,afterend

@@ -59,3 +59,47 @@ exports.postVisitor = (data, callback) => {
     callback(rows.insertId);
   });
 };
+
+exports.deleteVisitor = (id, callback) => {
+  console.log(id); // req.body 에서받은 req.body.id
+  const sql = ` delete
+                from visitor
+                where id = ${id}`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log('Visitor.js >>', rows);
+    callback(true);
+  });
+};
+
+exports.getVisitor = (id, callback) => {
+  //    id : controller 에서 보내주는 아이디
+  console.log('visitors.js', id);
+  const sql = `select *
+               from visitor
+               where id = ${id}`;
+  conn.query(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log('Visitor.js >>', rows);
+    callback(rows[0]);
+  });
+};
+
+exports.patchVisitor = (data, callback) => {
+  console.log(data);
+  const sql = `
+      update visitor
+      set name='${data.name}',
+          comment='${data.comment}',
+          where id = ${data.id};
+  `;
+  conn.query(sql, (err, rows) => {
+    if (err) throw err;
+    console.log('Visitor.js>>', rows);
+    callback(rows);
+  });
+};
