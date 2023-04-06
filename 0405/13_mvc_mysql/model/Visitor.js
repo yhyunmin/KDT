@@ -91,12 +91,10 @@ exports.getVisitor = (id, callback) => {
 
 exports.patchVisitor = (data, callback) => {
   console.log(data);
-  const sql = `
-      update visitor
-      set name='${data.name}',
-          comment='${data.comment}',
-          where id = ${data.id};
-  `;
+  const sql = `update visitor
+               set name='${data.name}',
+                   comment='${data.comment}'
+               WHERE id = ${data.id}`;
   conn.query(sql, (err, rows) => {
     if (err) throw err;
     console.log('Visitor.js>>', rows);
