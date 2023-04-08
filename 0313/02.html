@@ -1,175 +1,176 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS DOM : 요소다루기</title>
+    <style>
+      .add-h1 {
+        color: yellowgreen;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JS DOM : 요소다루기 </title>
-  <style>
-    .add-h1 {
-      color: yellowgreen;
-    }
+      img {
+        width: 100px;
+      }
 
-    img {
-      width: 100px;
-    }
+      .p-2 {
+        background-color: yellow;
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
 
-    .p-2 {
-      background-color: yellow;
-      font-size: 1.5rem;
-      font-weight: 300;
-    }
+      .p-3 {
+        background: navy;
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: white;
+      }
 
-    .p-3 {
-      background: navy;
-      font-size: 3.5rem;
-      font-weight: 900;
-      color: white;
-    }
+      .img-1 {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 6px solid pink;
+        box-shadow: 3px 3px 1rem rgba(0, 0, 0, 0.4);
+        background: url(https://www.seekpng.com/png/full/56-566883_pooh-gang-personajes-winnie-de-poo.png)
+          no-repeat center;
+      }
+    </style>
+  </head>
 
-    .img-1 {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border: 6px solid pink;
-      box-shadow: 3px 3px 1rem rgba(0, 0, 0, 0.4);
-      background: url(https://www.seekpng.com/png/full/56-566883_pooh-gang-personajes-winnie-de-poo.png) no-repeat center;
-    }
-  </style>
-</head>
+  <body>
+    <h1>js 요소 다루기</h1>
+    <div id="div1"></div>
+    <a href="https://naver.com" id="naver">naver</a>
+    <img
+      src="https://www.seekpng.com/png/full/56-566883_pooh-gang-personajes-winnie-de-poo.png"
+      alt="pooh"
+      id="pooh"
+    />
 
-<body>
-  <h1>js 요소 다루기</h1>
-  <div id="div1"></div>
-  <a href="https://naver.com" id="naver">naver</a>
-  <img src="https://www.seekpng.com/png/full/56-566883_pooh-gang-personajes-winnie-de-poo.png" alt="pooh" id="pooh" />
+    <ul id="friends">
+      <li>이요르</li>
+      <li id="tigger">티거</li>
+      <li>피글렛</li>
+      <li>로빈</li>
+    </ul>
 
-  <ul id="friends">
-    <li>이요르</li>
-    <li id="tigger">티거</li>
-    <li>피글렛</li>
-    <li>로빈</li>
-  </ul>
+    <div class="container"></div>
+    <script>
+      const pooh =
+        'https://www.seekpng.com/png/full/56-566883_pooh-gang-personajes-winnie-de-poo.png';
+      const div1 = document.getElementById('div1');
+      console.log(div1);
 
-  <div class="container"></div>
-  <script>
-    const pooh = 'https://www.seekpng.com/png/full/56-566883_pooh-gang-personajes-winnie-de-poo.png';
-    const div1 = document.getElementById('div1');
-    console.log(div1)
+      div1.innerHTML = '여기는<b>첫번째</b> 태그입니다. &hearts';
+      // innerHTML 은 태그나 , 특수문자도 작동이 잘됨.
+      console.log(div1.innerHTML);
 
-    div1.innerHTML = '여기는<b>첫번째</b> 태그입니다. &hearts'
-    // innerHTML 은 태그나 , 특수문자도 작동이 잘됨.
-    console.log(div1.innerHTML)
+      div1.innerText = '여기는<b>첫번째</b> 태그입니다. &hearts';
+      // innerText는 문자로만 구현됨 (태그작동 X 특수문자 X)
+      div1.textContent = '여기는<b>첫번째</b> 태그입니다. &hearths';
+      // innerText와 같음,textContent는 공백문자가 그대로 보임.
 
-    div1.innerText = '여기는<b>첫번째</b> 태그입니다. &hearts'
-    // innerText는 문자로만 구현됨 (태그작동 X 특수문자 X)
-    div1.textContent = '여기는<b>첫번째</b> 태그입니다. &hearths'
-    // innerText와 같음,textContent는 공백문자가 그대로 보임.
+      div1.innerHTML = '<ul><li>1</li><li>2</li></ul>';
 
-    div1.innerHTML = '<ul><li>1</li><li>2</li></ul>';
+      let naver = document.getElementById('naver');
+      naver.setAttribute('href', 'https://www.google.com');
+      // getAttribute ('속성') : 속성 값 가져오기.
 
-    let naver = document.getElementById('naver');
-    naver.setAttribute('href', 'https://www.google.com');
-    // getAttribute ('속성') : 속성 값 가져오기.
+      //둘이 동일
+      document.getElementById('pooh').getAttribute('id');
+      document.getElementById('pooh').id;
 
+      naver.href = '#';
+      // * layout.css 지정
+      const h1 = document.querySelector('h1');
+      const list = document.querySelectorAll('li');
+      // 1. style 속성 사용
+      for (let li of list) {
+        li.style.backgroundColor = 'purple';
+        li.style.color = '#444';
+        li.style.fontSize = '1.5rem';
+      }
+      // 2.classList
+      h1.classList; /* 클래스 확인 */
+      h1.classList.add('add-h1');
+      // classList.add : 클래스 추가
+      // classList.remove : 클래스 제거
+      // classList.contains : 있는지 없는지 확인 / true/false 반환
+      // classList.toggle : 해당클래스가 있으면 제거 / 없으면 추가 ( 스위치 )
 
-    //둘이 동일
-    document.getElementById('pooh').getAttribute('id');
-    document.getElementById('pooh').id;
+      // * 노드 찾기
+      let friends = document.querySelector('#friends');
+      let tigger = document.querySelector('#tigger');
 
-    naver.href = '#'
-    // * css 지정
-    const h1 = document.querySelector('h1');
-    const list = document.querySelectorAll('li');
-    // 1. style 속성 사용
-    for (let li of list) {
-      li.style.backgroundColor = 'purple';
-      li.style.color = '#444';
-      li.style.fontSize = '1.5rem';
-    }
-    // 2.classList
-    h1.classList /* 클래스 확인 */
-    h1.classList.add('add-h1')
-    // classList.add : 클래스 추가
-    // classList.remove : 클래스 제거
-    // classList.contains : 있는지 없는지 확인 / true/false 반환
-    // classList.toggle : 해당클래스가 있으면 제거 / 없으면 추가 ( 스위치 )
+      // 자식 노드
+      console.log(friends.children);
+      console.log(friends.children[0]);
 
-    // * 노드 찾기
-    let friends = document.querySelector('#friends');
-    let tigger = document.querySelector('#tigger')
+      //부모 노드
+      console.log(tigger.parentNode);
+      //형제 노드
+      console.log(tigger.nextElementSibling);
+      console.log(tigger.nextElementSibling.nextElementSibling);
+      console.log(tigger.previousElementSibling);
 
-    // 자식 노드
-    console.log(friends.children)
-    console.log(friends.children[0])
+      // 요소 생성 추가 삭제
+      let container = document.querySelector('.container');
+      let p = document.createElement('p');
+      let p2 = document.createElement('p');
+      let p3 = document.createElement('p');
+      p.innerText = '새로 추가된 p';
+      p.style.fontWeight = '700';
+      p.style.backgroundColor = 'red';
+      p2.innerHTML = 'p2';
+      p3.textContent = 'p3';
+      p2.classList.add('p-2');
+      p3.classList.add('p-3');
 
-    //부모 노드
-    console.log(tigger.parentNode)
-    //형제 노드
-    console.log(tigger.nextElementSibling)
-    console.log(tigger.nextElementSibling.nextElementSibling)
-    console.log(tigger.previousElementSibling)
+      //append : 선택된 요소의 ** 맨 마지막 자식** 으로 추가됨
+      container.append(p);
+      container.append(p2, p3);
+      //prepend : 선택된 요소의 맨 첫번째 자식으로 추가됨
 
-    // 요소 생성 추가 삭제
-    let container = document.querySelector('.container');
-    let p = document.createElement('p');
-    let p2 = document.createElement('p');
-    let p3 = document.createElement('p');
-    p.innerText = "새로 추가된 p"
-    p.style.fontWeight = '700';
-    p.style.backgroundColor = 'red';
-    p2.innerHTML = 'p2'
-    p3.textContent = 'p3';
-    p2.classList.add('p-2');
-    p3.classList.add('p-3');
+      let li1 = document.createElement('li');
+      li1.textContent = '캉가'; /* freinds ul안에 넣을예정 */
 
-    //append : 선택된 요소의 ** 맨 마지막 자식** 으로 추가됨
-    container.append(p);
-    container.append(p2, p3)
-    //prepend : 선택된 요소의 맨 첫번째 자식으로 추가됨
+      friends.prepend(li1);
 
-    let li1 = document.createElement('li');
-    li1.textContent = '캉가'/* freinds ul안에 넣을예정 */
-
-    friends.prepend(li1);
-
-
-    //before & after
-    /* 
+      //before & after
+      /*
     before : 선택된 요소의 앞으로 추가
     after : 선택된 요소의 뒤로 추가
     */
 
-    let h3 = document.createElement('h3');
-    h3.textContent = 'h3'
-    h1.after(h3);
+      let h3 = document.createElement('h3');
+      h3.textContent = 'h3';
+      h1.after(h3);
 
-    let h2 = document.createElement('h2');
-    h2.innerHTML = 'h2';
-    h1.before(h2);
+      let h2 = document.createElement('h2');
+      h2.innerHTML = 'h2';
+      h1.before(h2);
 
-    let firstLI = document.querySelector('li');
-    ul = firstLI.parentNode;
+      let firstLI = document.querySelector('li');
+      ul = firstLI.parentNode;
 
-    // firstLI.remove() /* 선택된 요소가 삭제됨 (firstLi) */
-    ul.removeChild(firstLI); // 자식요소를 지워줌
+      // firstLI.remove() /* 선택된 요소가 삭제됨 (firstLi) */
+      ul.removeChild(firstLI); // 자식요소를 지워줌
 
-    // 요소 삭제 :  remove와 removeChild의 차이점
-    /* 
+      // 요소 삭제 :  remove와 removeChild의 차이점
+      /*
     요소.remove() :선택된 요소 삭제
     요소.removeChild(자식요소): 요소의 "자식요소"가 삭제됨
     */
-    // 이미지 태그 만들어서 추가해보기
+      // 이미지 태그 만들어서 추가해보기
 
-    const container2 = document.createElement('div');
-    const img = document.createElement('img');
-    img.setAttribute('src', pooh);
-    img.classList.add('img-1')
-    container2.append(img);
-    document.body.append(container2);
-
-  </script>
-</body>
-
+      const container2 = document.createElement('div');
+      const img = document.createElement('img');
+      img.setAttribute('src', pooh);
+      img.classList.add('img-1');
+      container2.append(img);
+      document.body.append(container2);
+    </script>
+  </body>
 </html>
