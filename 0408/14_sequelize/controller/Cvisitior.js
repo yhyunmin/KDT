@@ -56,6 +56,7 @@ exports.postVisitor = async (req, res) => {
 };
 
 exports.deleteVisitor = async (req, res) => {
+  console.log("****************** deleteVisitor ", req.body);
   // [before]
   // Visitor.deleteVisitor(req.body.id, (result) => {
   //   console.log("Cvisitor.js>>", result);

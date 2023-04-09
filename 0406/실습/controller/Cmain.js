@@ -107,6 +107,7 @@ exports.postCheckUserId = (req, res) => {
 };
 
 exports.deleteUserInfo = (req, res) => {
+  console.log(">>>>>>>>>>>>>>>>>>>>", req.body);
   Model.deleteUserInfo(req.body, (rows) => {
     console.log(rows);
     res.send("성공!");

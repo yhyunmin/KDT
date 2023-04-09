@@ -95,7 +95,7 @@ exports.patchUserInfo = (data, cb) => {
 
 exports.deleteUserInfo = (data, cb) => {
   const sql = `
-  delete from user where userid = '${data.userid}';
+  delete from user where userid = '${data.id}'; 
   `;
   conn.query(sql, (err, rows) => {
     if (err) throw err;
@@ -103,5 +103,3 @@ exports.deleteUserInfo = (data, cb) => {
     cb(rows);
   });
 };
-
-exports.getRegister = () => {};

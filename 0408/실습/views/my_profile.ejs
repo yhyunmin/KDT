@@ -142,7 +142,7 @@
 
     deleteBtn.addEventListener('click', async function() {
         // e.preventDefault();
-        const result = await axios.delete('/my_profile/delete', { data:{ userid:userId.value } });
+        const result = await axios.delete('/my_profile/delete', { data:{ id:userId.value } });
         console.log(result);
         // alert('로그인 페이지로 이동합니다.');
         document.location.href = '/login'
