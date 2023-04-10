@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang='ko'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport'
+          content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>쿠키 실습</title>
+    <style>
+      #modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        backdrop-filter: blur(20px);
+        }
+
+      #modalMain {
+        position: absolute;
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%, -50%) scale(1);
+        width: 50vw;
+        height: 250px;
+        border-radius: 20px;
+        z-index: 1;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, .95);
+        }
+    </style>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+    </script>
+</head>
+<h1>cookie</h1>
+<div id='container'>
+    <main class='main' id='main'>
+        <input type='checkbox'> overlay테스트 (안눌리지롱)
+        <h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur cumque, fugit illo ipsam nostrum
+            sequi
+            unde. Aliquam amet cum deleniti ea eum, exercitationem fugit ipsum nostrum provident quas quasi recusandae.
+        </h1>
+        <h1>Architecto aut commodi dolor dolore dolorem eius explicabo fugit id illo maiores maxime molestiae numquam
+            quasi, quia reiciendis repellendus, sed similique tenetur veritatis voluptas. Enim fuga fugit incidunt modi
+            recusandae.
+        </h1>
+        <h1>Ad culpa debitis, deleniti et eum facilis illum nesciunt numquam provident veniam vero voluptatibus. Cumque
+            doloribus esse exercitationem fugiat maiores quaerat repellat. Aliquid architecto consequuntur et eveniet
+            laudantium natus, quis!
+        </h1>
+        <h1>Accusamus alias dolorem earum exercitationem laborum odio officiis quod rerum soluta, temporibus! Corporis
+            delectus dolorum facilis hic ipsam ipsum iste mollitia nulla pariatur placeat possimus quaerat, quis vel
+            velit
+            voluptas.
+        </h1>
+        <h1>Ab accusantium aperiam asperiores beatae delectus dicta dolore dolorum excepturi exercitationem facilis
+            incidunt magni minus mollitia natus neque nobis numquam optio placeat praesentium quibusdam unde ut veniam,
+            veritatis? Adipisci, minima!
+        </h1>
+    </main>
+</div>
+<article id='modal' style='display: none'>
+    <section id='modalMain'><h4>안내</h4>
+        <h2>인터넷 익스플로러(IE) 지원 종료 안내</h2>
+        <p>인터넷 익스플로러 서비스지원이 끝났슴 ㅎ </p>
+        <label for='checkbox'>
+            <input type='checkbox' name='checkbox' id='checkbox'> 그만 보기
+        </label></section>
+</article>
+<script>
+    const checkbox = document.querySelector('#checkbox');
+    const modal = document.querySelector('#modal');
+    (async function() {
+        const result = await axios.get('/getCookie');
+        console.log('test', result);
+        if (result.data.okay) {
+            modal.style.display = 'none';
+        } else {
+            modal.style.display ='block'
+        }
+    })();
+    checkbox.addEventListener('change', async function() {
+        const result = await axios.get('/setCookie', { check:'a' })
+        if (this.checked) {
+            modal.style.display = 'none';
+        } else {
+            modal.style.display = 'block';
+        }
+    })
+
+</script>
+</html>
