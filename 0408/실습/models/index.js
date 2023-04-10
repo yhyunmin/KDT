@@ -11,5 +11,10 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+//추가 테이블
 db.Model = require("./Model")(sequelize, Sequelize);
+db.Visitor = require("./Visitor")(sequelize, Sequelize);
+
+//
+///
 module.exports = db;

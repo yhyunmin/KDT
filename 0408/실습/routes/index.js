@@ -1,5 +1,6 @@
 const express = require("express");
 const controller = require("../controller/Cmain");
+const visitor = require("../controller/Cvisitior");
 const router = express.Router();
 
 console.log(">>>>>>>>>>>>>>>>>>>>>>", controller);
@@ -25,5 +26,19 @@ router.post("/my_profile", controller.postMyProfile);
 router.patch("/patchUserInfo", controller.patchUserInfo);
 
 router.delete("/my_profile/delete", controller.deleteUserInfo);
+
+router.get("/visitor", visitor.getVisitors); // 전체 조회
+
+// POST /visitor/write
+router.post("/visitor/write", visitor.postVisitor); // 코멘트 하나 추가
+
+router.delete("/visitor/delete", visitor.deleteVisitor); // 코멘트 하나 삭제
+
+//GET visitor/get
+router.get("/visitor/get", visitor.getVisitor); // 코멘트 하나 조회
+module.exports = router;
+
+// PATCH /visitor/edit
+router.patch("/visitor/edit", visitor.patchVisitor); // 하나 수정
 
 module.exports = router;

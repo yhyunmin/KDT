@@ -26,6 +26,7 @@ app.use(express.json());
 //   }),
 // });
 const indexRouter = require("./routes");
+
 app.use("/", indexRouter);
 app.get("*", (req, res) => {
   // res.send('404 Error! 잘못된 주소 형식입니다.');
