@@ -5,7 +5,7 @@
 ## API
 
 * application Protocol Interface
-* 프로그래밍할 때 필요한 인터페이스
+* 프로그래밍할 때 필요한 인터페이스ㅁr
 * ex ) 손님은 메뉴판(API)를 이용해서 직원(서버)에게 주문(요청/request)를 함
 
 ## REST API : REST 원리를 따르는 API
