@@ -2,7 +2,6 @@ const express = require("express");
 const controller = require("../controller/Cmain");
 const visitor = require("../controller/Cvisitior");
 const session = require("../controller/Session");
-const { deleteSession } = require("../controller/Session");
 const router = express.Router();
 
 console.log(">>>>>>>>>>>>>>>>>>>>>>", controller);
@@ -50,8 +49,8 @@ router.patch("/visitor/edit", visitor.patchVisitor); // 하나 수정
 // router.get("/getSession", session.getSession);
 //DELETE deleteSession
 
-// router.delete("/deleteSession", session.deleteSession);
+// router.get("/deleteSession", session.deleteSession);
 router.get("/logout", session.deleteSession);
 
-router.get("/test", session.test);
+// router.get("/test", session.test);
 module.exports = router;

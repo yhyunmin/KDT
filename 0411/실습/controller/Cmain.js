@@ -6,7 +6,7 @@ exports.getIndex = async (req, res) => {
   console.log(req.session.name);
   res.render("index", {
     pageTitle: "사이트 이름",
-    session: req.session.name ? true : false,
+    session: req.session.name,
     // session: !!req.session.name,
   });
 };
@@ -146,9 +146,9 @@ exports.postCheckLogin = async (req, res) => {
     });
   } else if (
     req.body.userId === response.userid ||
-    req.body.userPw === response.pw
+    req.body.userPw === response.pwx1
   ) {
-    req.session.name = "집에가고싶다";
+    req.session.name = response.name;
     res.send({
       hasInfo: true,
     });
@@ -186,8 +186,8 @@ exports.postMyProfile = async (req, res) => {
     userId: response.userid,
     userPw: response.pw,
     id: response.id,
-    SID: req.sessionID, //session ID 체크
-    SNAME: req.session.name, //session name 체크
+    // SID: req.sessionID, //session ID 체크
+    // SNAME: req.session.name, //session name 체크
   });
 };
 //

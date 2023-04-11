@@ -12,26 +12,24 @@
 </h1>
 <hr>
 <% if (session) { %>
+    <h2 class='is-2'>안녕하세요.
+    <strong>
+        <%= session %>
+    </strong>
+      님,  환영합니다.</h2>
     <%- include('./includes/logout.ejs') %>
 <% } else { %>
     <%- include('./includes/main_buttons.ejs') %>
 <% } %>
 <br><br>
 
-<a href='/test'>session check</a>
 <button class="button is-link is-light is-rounded m-3" onclick="location.href = '/visitor'">방명록</button>
 <script>
-    // const logout = document.querySelector('#logout');
-    // logout?.addEventListener('click', async function() {
-    //     // const res = await axios.delete('/deleteSession');
-    //     // console.log(res.data)
-    //
-    //     const res = await axios.delete('/deleteSession');
-    //     console.log(res)
-    //     // document.location.href = '/'
-    //     // window.location.reload();
-    //
-    // });
+    const logout = document.querySelector('#logout');
+    logout?.addEventListener('click', async function() {
+        const res = await axios.get('/logout');
+        document.location.href='/'
+    });
 </script>
 </body>
 </html>

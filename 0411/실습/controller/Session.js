@@ -9,17 +9,13 @@
 //     name: req.session.name, //session name 체크
 //   });
 // };
-exports.deleteSession = (req, res) => {
-  console.log("GET /loggout 실행!!!!!!!!!!!!!!");
-  console.log("*** &&&", req.session);
-  req.session.destroy((err) => {
+exports.deleteSession = async (req, res) => {
+  await req.session.destroy((err) => {
     if (err) throw err;
     res.redirect("/");
     // res.end();
   });
-  // res.send("!!");
 };
-
 exports.test = (req, res) => {
   res.send({
     id: req.sessionID,
