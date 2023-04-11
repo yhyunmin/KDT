@@ -10,6 +10,7 @@
 //   });
 // };
 exports.deleteSession = (req, res) => {
+  console.log("GET /loggout 실행!!!!!!!!!!!!!!");
   console.log("*** &&&", req.session);
   req.session.destroy((err) => {
     if (err) throw err;

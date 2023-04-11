@@ -1,15 +1,5 @@
 <button type="button" class="button m-3 is-rounded" id="logout">
-    <span>로그아웃</span>
+<!--    <span>로그아웃</span>-->
+    <a href='/logout'>로그아웃</a>
     <span class="icon"><i class="fa fa-sign-out"></i></span>
 </button>
-<script>
-    const logout = document.querySelector('#logout');
-    logout.addEventListener('click', async function() {
-        // const res = await axios.delete('/deleteSession');
-        // console.log(res.data)
-
-        await axios.delete('/deleteSession');
-        document.location.href = '/'
-        // window.location.reload();
-    });
-</script>
