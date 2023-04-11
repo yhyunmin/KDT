@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <%- include('./includes/header.ejs') %>
+    <title>INDEX</title>
+</head>
+
+
+<body>
+<h1 class="title is-2 m-3">
+    <%= pageTitle %>
+</h1>
+<hr>
+<% if (session) { %>
+    <%- include('./includes/logout.ejs') %>
+<% } else { %>
+    <%- include('./includes/main_buttons.ejs') %>
+<% } %>
+<br><br>
+
+<a href='/test'>session check</a>
+<button class="button is-link is-light is-rounded m-3" onclick="location.href = '/visitor'">방명록</button>
+</body>
+</html>
