@@ -1,0 +1,18 @@
+{
+  "name": "0411",
+  "version": "1.0.0",
+  "description": "# Session 이란, * **웹 서버에 저장**되는 쿠키 * 사용자가 웹 브라우저를 통해 접속한 시점부터 연결을 끝내는 시점까지의 * 시간 동안 일련의 요구를 하나의 상태로 보고 그 상태를 유지 시킨다. * 쿠키보다 보안 측면에 좋다. ex ) 로그인 유지",
+  "main": "session.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
+  }
+}
