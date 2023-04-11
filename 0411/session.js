@@ -30,6 +30,32 @@ app.get("/", (req, res) => {
   res.render("session");
 });
 
+app.get("/set", (req, res) => {
+  // 세션 설정
+  req.session.name = "홍길동";
+  // 응답
+  res.send("세션 설정 완료!");
+});
+
+app.get("/name", (req, res) => {
+  // 세션 (읽기 전용)
+  //req.session.키
+  //req.sessionID: 현재 세션의 ID ( 서버가 클랑이ㅓㄴ트를 구별하기 위해 부여하는 고유 값)
+  // -> 브라우저 단위로 다른값을 가짐
+  res.send({
+    id: req.sessionID,
+    name: req.session.name,
+  });
+});
+
+app.get("/destroy", (req, res) => {
+  // req.session.destroy(세션삭제시 호출할 콜백 함수)
+  // -> 세션 완전히 삭제되고, 웹 사이트 접속 할 때 마다 새로운 session ID 할당
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.send("세션 삭제 완료");
+  });
+});
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
