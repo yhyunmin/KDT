@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      #reaction-container {
+        display: flex;
+      }
+
+      .test {
+        padding: 3rem;
+        margin: 3rem;
+        background-color: red;
+        position: relative;
+      }
+
+      .text {
+        background: orange;
+        padding: 1.5rem;
+      }
+
+      .button-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .on {
+        display: flex;
+      }
+
+      .off {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test">
+      <div class="message"><span class="text">테스트 입니다.</span></div>
+      <div class="button-bar off">
+        <button class="btn-item quake">🌀</button>
+        <button class="btn-item ta-da">🎉</button>
+        <button class="btn-item">💓</button>
+        <button class="btn-item">🌀</button>
+        <button class="btn-item">🌀</button>
+      </div>
+    </div>
+    <div class="test">
+      <div class="message"><span class="text">테스트 입니다.</span></div>
+      <div class="button-bar off">
+        <button class="btn-item quake">🌀</button>
+        <button class="btn-item ta-da">🎉</button>
+        <button class="btn-item">💓</button>
+        <button class="btn-item">🌀</button>
+        <button class="btn-item">🌀</button>
+      </div>
+    </div>
+
+    <script>
+      const test = document.querySelectorAll(".test");
+      const msg = document.querySelectorAll(".message");
+
+      msg.forEach((item) => {
+        console.log(item);
+        item.addEventListener("mouseenter", function (e) {
+          console.log(this);
+          e.stopPropagation();
+          const btnBar = this.parentNode.querySelector(".button-bar");
+          // const btnBar = this.querySelector(".button-bar");
+          btnBar.classList.replace("off", "on");
+        });
+      });
+      test.forEach((item) => {
+        item.addEventListener("mouseleave", function (e) {
+          e.stopPropagation();
+          const btnBar = this.querySelector(".button-bar");
+          btnBar.classList.replace("on", "off");
+        });
+      });
+    </script>
+  </body>
+</html>
