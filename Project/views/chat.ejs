@@ -17,6 +17,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="../static/scroll.css">
     <style>
+      .entry {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 30rem;
+        height: 30rem;
+        background: blue;
+        border-radius: 2rem;
+        }
+      .notice {
+        text-align: center;
+        color: #005397;
+        font-size: 1.2rem;
+        }
 
     </style>
 </head>
@@ -30,6 +58,7 @@
                 </a>
             </button>
             <h1>채팅</h1>
+
             <button id="more">
                 <i class="fas fa-bars"></i>
 
@@ -84,6 +113,13 @@
         </div>
     </div>
 </div>
+<div class="entry">
+    <div class="box">
+        <input type="text" id="nickname" placeholder="Nickname" autofocus />
+        <button type="button" onclick="entry();">입장</button>
+    </div>
+</div>
+
 <script>
   const chat = document.querySelector("#chatContent");
   // const enter = document.querySelector("#enter");
@@ -131,17 +167,18 @@
 </script>
 
 <script>
+
   // 말풍선 호버할  때 반응 팝업 on/off
   const msg = document.querySelectorAll(".message");
-  console.log('msg',msg)
+  console.log('msg', msg)
   const chatWrap = document.querySelectorAll(".chat-wrap");
   msg.forEach((item) => {
-    console.log(item);
+    // console.log(item);
     item.addEventListener("mouseenter", function (e) {
-      console.log(this);
+      // console.log(this);
       e.stopPropagation();
       const btnBar = this.parentNode.querySelector(".button-bar");
-      console.log(btnBar)
+      // console.log(btnBar)
       // const btnBar = this.querySelector(".button-bar");
       btnBar.classList.replace("off", "on");
     });
@@ -163,40 +200,73 @@
   socket.on('connect', () => {
     console.log('chat.ejs Connected =.', socket.id)
   })
+  socket.on('notice',(msg)=>{
+    document
+    .querySelector("#chatContent")
+    .insertAdjacentHTML("beforeend", `<div class="notice">${msg}</div>`);
+  })
+  function entry() {
+    console.log(document.querySelector("#nickname").value);
+    socket.emit("setNick", document.querySelector("#nickname").value);
+  }
+
+  socket.on("entry", (nick) => {
+    // 1. 내 닉네임 설정
+    myNick = nick;
+document.querySelector('.entry').remove();
+    // // 2. 닉네임 입력창 & 버튼 비활성화
+    // document.querySelector("#nickname").disabled = true; // 입력창 비활성화 (클릭 막기)
+    // document.querySelector(".entry-box > button").disabled = true; // 버튼 비활성화 (클릭 막기)
+    // // 3. div.chat-box 요소 보이기
+    // document.querySelector(".chat-box").classList.remove("d-none");
+  });
+
+  // 리액션 반응
   const quake = document.querySelectorAll('.quake');
   const tada = document.querySelectorAll('.ta-da');
   const reactObj = {
     quake:[ 'animate__animated', 'animate__shakeX' ],
-    tada:[  'animate__animated', 'animate__tada'   ],
+    tada:[ 'animate__animated', 'animate__tada' ],
   }
-  quake.forEach((item)=>{
+  quake.forEach((item) => {
     item.addEventListener('click', function (e) {
       const id = e.target.id;
       const reactID = reactObj[id];
-      console.log(reactID)
-      socket.emit('react-quake', reactID,id);
+      const target = this.parentNode.parentNode.querySelector('.chat-box')
+      // 태그의 고유값 보내기
+      target.id = 'id' + Date.now();
+      const sid = target.id;
+      // console.log(target.id)
+      // console.log('this',this)
+      // console.log(this.parentNode);
+      // console.log('lol',this.parentNode.parentNode.querySelector('.chat-box'));
+      const data = {
+        reactID:reactID,
+        id:sid,
+      }
+      socket.emit('quake', data);
     })
   })
-  tada.forEach((item)=>{
-    item.addEventListener('click', function (e) {
-      const id = e.target.id;
-      const reactID = reactObj[id];
-      console.log(reactID)
-      socket.emit('react-tada', reactID,id);
-    })
-  })
-
-  let removeReact;
-  socket.on('react', (reactID) => {
-    if (removeReact) clearTimeout(removeReact);
-    removeReact = setTimeout(function () {
-      chatBox.classList.remove(reactID[1])
-    }, 500)
-
-    const chatBox = document.querySelector('.chat-box');
-    chatBox.classList.add(reactID[0], reactID[1]);
+  // let removeReact;
+  socket.on('react', (data) => {
+    // console.log(data)
+    console.log(data.id)
+    console.log(data.first, data.second, data.first)
+    const chatBox = document.querySelector('#' + data.id);
+    console.log(chatBox)
+    // if (removeReact) clearTimeout(removeReact);
+    // removeReact = setTimeout(function () {
+    //   chatBox.classList.remove(data.second)
+    // }, 500)
+    // 애니메이션 추가
+    chatBox.classList.add(data.first, data.second);
+    // 받은 ID 삭제
+    chatBox.removeAttribute('id');
   })
   //   채팅창 입장 / 퇴장 안내 문구
+
+  // 채팅방
+  socket.emit('setNick', document.querySelector('#nickname').value)
 </script>
 
 </body>

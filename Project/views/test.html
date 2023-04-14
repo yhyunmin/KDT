@@ -10,8 +10,28 @@
     <title>Document</title>
 
     <style>
-      #reaction-container {
+      .entry {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
         display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 30rem;
+        height: 30rem;
+        background: blue;
+        border-radius: 2rem;
       }
 
       .test {
@@ -62,7 +82,12 @@
         <button class="btn-item">🌀</button>
       </div>
     </div>
-
+    <div class="entry">
+      <div class="box">
+        <input type="text" id="nickname" placeholder="Nickname" autofocus />
+        <button type="button" onclick="entry();">입장</button>
+      </div>
+    </div>
     <script>
       const test = document.querySelectorAll(".test");
       const msg = document.querySelectorAll(".message");
