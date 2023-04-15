@@ -96,8 +96,8 @@ io.on("connection", (socket) => {
   socket.on("quake", (data) => {
     // console.log("quake", data);
     const obj = {
-      first: data.reactID[0],
-      second: data.reactID[1],
+      first: data.reactID,
+      // second: data.reactID[1],
       id: data.rid,
     };
     io.emit("react", obj);
@@ -105,8 +105,8 @@ io.on("connection", (socket) => {
   socket.on("tada", (data) => {
     // console.log("tada", data);
     const obj = {
-      first: data.reactID[0],
-      second: data.reactID[1],
+      first: data.reactID,
+      // second: data.reactID[1],
       id: data.rid,
     };
     io.emit("react", obj);
@@ -114,8 +114,8 @@ io.on("connection", (socket) => {
   socket.on("heartBeat", (data) => {
     // console.log("heartBeat", data);
     const obj = {
-      first: data.reactID[0],
-      second: data.reactID[1],
+      first: data.reactID,
+      // second: data.reactID[1],
       id: data.rid,
     };
     io.emit("react", obj);
@@ -123,8 +123,8 @@ io.on("connection", (socket) => {
   socket.on("rubber", (data) => {
     // console.log("rubber", data);
     const obj = {
-      first: data.reactID[0],
-      second: data.reactID[1],
+      first: data.reactID,
+      // second: data.reactID[1],
       id: data.rid,
     };
     io.emit("react", obj);
@@ -132,8 +132,8 @@ io.on("connection", (socket) => {
   socket.on("hinge", (data) => {
     // console.log("hinge", data);
     const obj = {
-      first: data.reactID[0],
-      second: data.reactID[1],
+      first: data.reactID,
+      // second: data.reactID[1],
       id: data.rid,
     };
     io.emit("react", obj);

@@ -8,15 +8,15 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>챗방</title>
-    <link rel="stylesheet" href="../static/common.css" />
-    <link rel="stylesheet" href="../static/chat.css" />
+    <link rel="stylesheet" href="/static/common.css" />
+    <link rel="stylesheet" href="/static/chat.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
             integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="../static/scroll.css">
-    <link rel="stylesheet" href="../static/extra.css">
+    <link rel="stylesheet" href="/static/scroll.css">
+    <link rel="stylesheet" href="/static/extra.css">
 
     <style>
 
@@ -201,6 +201,15 @@
   //         <button class="btn-item">🌀</button>
   //         <button class="btn-item">🌀</button>
   //       </div>
+  const defaultReact = 'animate__animated';
+  const reactObj = {
+    quake:'animate__shakeX',
+    tada:'animate__tada',
+    heartBeat:'animate__heartBeat',
+    rubber:'animate__rubberBand',
+    hinge:'animate__hinge',
+  };
+
   function makeBtnBar (who) {
     const buttonBar = document.createElement('div');
     buttonBar.classList.add('button-bar', who)
@@ -310,9 +319,7 @@
       chatWrap.append(makeBtnBar('ur-button-bar'));
     }
     document.querySelector('#chatContent').append(chatWrap);
-    setTimeout(() => {
-      chat.scrollTop = chat.scrollHeight;
-    }, 10)
+    chat.scrollTop = chat.scrollHeight;
     reaction();
     sendReact();
 
@@ -353,18 +360,11 @@
     const heartBeat = document.querySelectorAll('.heartbeat');
     const rubber = document.querySelectorAll('.rubber');
     const hinge = document.querySelectorAll('.hinge');
-    const reactObj = {
-      quake:[ 'animate__animated', 'animate__shakeX' ],
-      tada:[ 'animate__animated', 'animate__tada' ],
-      heartBeat:[ 'animate__animated', 'animate__heartBeat' ],
-      rubber:[ 'animate__animated', 'animate__rubberBand' ],
-      hinge:[ 'animate__animated', 'animate__hinge' ],
-    }
+
     quake.forEach((item) => {
       item.addEventListener('click', function (e) {
         const id = e.target.id;
         const reactID = reactObj[id];
-
         const target = this.parentNode.parentNode.querySelector('.chat-box')
         console.log(target)
         // 태그의 고유값 보내기
@@ -380,7 +380,6 @@
       item.addEventListener('click', function (e) {
         const id = e.target.id;
         const reactID = reactObj[id];
-
         const target = this.parentNode.parentNode.querySelector('.chat-box')
         console.log(target)
         // 태그의 고유값 보내기
@@ -458,17 +457,30 @@
     })
   }
 
-  let removeReact;
+  let proceeding = false;
   socket.on('react', (data) => {
-    console.log('react', data);
-    if (removeReact) clearTimeout(removeReact);
-    removeReact = setTimeout(function () {
-      chatBox.classList.remove(data.second)
-    }, 1000)
-    // {first: "animate__animated", second: "animate__shakeX", id: "rid1681528121811"}
     const chatBox = document.querySelector('#' + data.id);
-    console.log('selected chatbox', chatBox);
-    chatBox.classList.add(data.first, data.second);
+    // if (proceeding) return clearTimeout(removeReact);
+    // const removeReact = setTimeout(function () {
+    //   chatBox.classList.remove(data.second)
+    //   proceeding = false;
+    //   console.log(proceeding)
+    // }, 1000)
+    // if (chatBox.contains(data.second)) return;
+    // chatBox.classList.remove(data.second);
+    console.log('>>', data.first);
+    // if (chatBox.contains(data.first)) chatBox.classList.toggle(data.first);
+    chatBox.setAttribute('class', "chat-box message my-chat");
+    chatBox.classList.add(defaultReact, data.first);
+    setTimeout(() => {
+      chatBox.classList.remove(data.first);
+    }, 1000)
+
+    proceeding = true;
+    // console.log(proceeding)
+    // console.logs('react', data);
+    // // {first: "animate__animated", second: "animate__shakeX", id: "rid1681528121811"}
+    // console.log('selected chatbox', chatBox);
     // chatBox.removeAttribute('id');
 
     // 애니메이션 추가

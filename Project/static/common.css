@@ -34,8 +34,9 @@ body {
   display: flex;
   width: 50vw;
   max-width: 50vw;
-  min-width: 480px;
-  height: 100vh;
+  min-width: 370px;
+  /*height: 100vh;*/
+  height: 100%;
   justify-content: center;
 }
 #chatWrap {
