@@ -8,81 +8,172 @@
     <title>Document</title>
     <link rel="stylesheet" href="../static/common.css">
     <link rel="stylesheet" href="../static/index.css">
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+            integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+            crossorigin="anonymous"></script>
     <style>
+      .entry {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
 
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 30rem;
+        height: 30rem;
+        background: blue;
+        border-radius: 2rem;
+        }
+
+      .notice {
+        text-align: center;
+        color: #005397;
+        font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
 <div id="root">
-    <div id="chatWrap">
-        <div id="chatHeader">
-            <h1>대화할 방을 선택 하세요.</h1>
-        </div>
-        <div id="chatList">
-            <div class="list-item">
-                <div class="image">image</div>
-                <div class="title">
-                    <div class="member">현재 멤버 : test , 누구 </div>
-                    <div class="last-message">
-                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="list-item">
-                <div class="image">image</div>
-                <div class="title">
-                    <div class="member">현재 멤버 : test , 누구 </div>
-                    <div class="last-message">
-                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
-                    </div>
-                </div>
-            </div>
+    <div class="entry">
+        <div class="box">
+            <input type="text" id="nickname" placeholder="닉네임을 입력해주세요." autofocus />
+            <button type="button" id="submit">입장</button>
+            <button type="button" id="random">랜덤닉네임</button>
 
-            <div class="list-item">
-                <div class="image">image</div>
-                <div class="title">
-                    <div class="member">현재 멤버 : test , 누구 </div>
-                    <div class="last-message">
-                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="list-item">
-                <div class="image">image</div>
-                <div class="title">
-                    <div class="member">현재 멤버 : test , 누구 </div>
-                    <div class="last-message">
-                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="footer">
-            <div class="add-list"> + </div>
         </div>
     </div>
+
+    <!--    <div id="chatWrap">-->
+    <!--        <div id="chatHeader">-->
+    <!--            <h1>대화할 방을 선택 하세요.</h1>-->
+    <!--        </div>-->
+    <!--        <div id="chatList">-->
+    <!--            <div class="list-item">-->
+    <!--                <div class="image">image</div>-->
+    <!--                <div class="title">-->
+    <!--                    <div class="member">현재 멤버 : test , 누구 </div>-->
+    <!--                    <div class="last-message">-->
+    <!--                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+
+    <!--            <div class="list-item">-->
+    <!--                <div class="image">image</div>-->
+    <!--                <div class="title">-->
+    <!--                    <div class="member">현재 멤버 : test , 누구 </div>-->
+    <!--                    <div class="last-message">-->
+    <!--                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+
+    <!--            <div class="list-item">-->
+    <!--                <div class="image">image</div>-->
+    <!--                <div class="title">-->
+    <!--                    <div class="member">현재 멤버 : test , 누구 </div>-->
+    <!--                    <div class="last-message">-->
+    <!--                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+
+    <!--            <div class="list-item">-->
+    <!--                <div class="image">image</div>-->
+    <!--                <div class="title">-->
+    <!--                    <div class="member">현재 멤버 : test , 누구 </div>-->
+    <!--                    <div class="last-message">-->
+    <!--                        <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div id="footer">-->
+    <!--            <div class="add-list"> + </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </div>
 <script>
-  const listItem = document.querySelectorAll('.list-item');
+  const socket = io.connect();
+  const inputNick = document.querySelector('#nickname');
+  const btn = document.querySelector('#submit');
+  const btnRand = document.querySelector('#random')
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const data = {
+      myNick:inputNick.value,
+    }
+    console.log('index data', data);
+    socket.emit('test', data);
+    window.location.href='/chat'
 
+  });
+  // todo  1페이지에서 보낸 데이터 2페이지로 보내기
 
-  //forEach 돌릴 것
-  listItem[0].addEventListener('click',function(){
-    document.location.href = 'chat';
+  btnRand.addEventListener('click', function (e) {
+    e.preventDefault();
+    const randomFunc = () => {
+      return Math.floor(Math.random() * first.length) ;
+    }
+    const first = [
+      '강아지',
+      '변기',
+      '치킨',
+      '망아지',
+      '양아치',
+      '아메리카노',
+    ]
+    const second = [
+      '잡아먹는',
+      '핥는',
+      '닦는',
+      '참는',
+      '튀기는',
+      '뒤집는'
+    ]
+    const last = [
+      '알바생',
+      '토마토주스',
+      '어르신',
+      '장난감',
+      '강아지',
+      '이현민',
+    ]
+    // console.log(randomFunc())
+    inputNick.value = first[randomFunc()] + second[randomFunc()] + last[randomFunc()];
   })
+</script>
+<script>
+  // const listItem = document.querySelectorAll('.list-item');
 
-  // 피드백 이벤트
-  listItem[0].addEventListener('mousedown',function(){
-    listItem[0].style.backgroundColor = '#ddd';
-  })
-  listItem[0].addEventListener('mouseup',function(){
-    listItem[0].style.backgroundColor = '#ccc';
-  })
-  listItem[0].addEventListener('mouseout',function(){
-    listItem[0].style.backgroundColor = '#ccc';
-  })
+  //
+  // //forEach 돌릴 것
+  // listItem[0].addEventListener('click', function () {
+  //   document.location.href = 'chat';
+  // })
+  //
+  // // 피드백 이벤트
+  // listItem[0].addEventListener('mousedown', function () {
+  //   listItem[0].style.backgroundColor = '#ddd';
+  // })
+  // listItem[0].addEventListener('mouseup', function () {
+  //   listItem[0].style.backgroundColor = '#ccc';
+  // })
+  // listItem[0].addEventListener('mouseout', function () {
+  //   listItem[0].style.backgroundColor = '#ccc';
+  // })
 </script>
 </body>
 </html>

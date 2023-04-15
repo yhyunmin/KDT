@@ -13,11 +13,13 @@
   --highlightColor:#7b71ab;
   --mainColor:#2b2640;
   --txtColor:#eeeeee;
+  user-select: none;
   }
 body {
   margin: 0;
   padding: 0;
   font-family: 'Pretendard-Regular',serif;
+  /*font-family: 'Pretendard',serif;*/
   font-size: 1.6rem;
   }
 
@@ -27,7 +29,6 @@ body {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  background-color: #eee;
   width: 50vw;
   max-width: 50vw;
   min-width: 480px;

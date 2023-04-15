@@ -31,6 +31,14 @@ function updateNickList() {
 // 채팅방 입장
 io.on("connection", (socket) => {
   console.log("a user connected socket.id =>", socket.id);
+  // todo 테스트 1페이지에서 2페이지 넘기기
+  socket.on("test", (data) => {
+    console.log("test", data);
+    const data2 = {
+      myNick: data.myNick,
+    };
+    socket.emit("receiveTest", data2);
+  });
   // 닉네임 검사
   socket.on("setNick", (nick) => {
     if (Object.values(nickObj).indexOf(nick) > -1) {
@@ -51,14 +59,23 @@ io.on("connection", (socket) => {
     delete nickObj[socket.id];
     updateNickList();
   });
+  socket.on("send", (obj) => {
+    console.log("send 받았슴다", obj);
+    const sendData = {
+      nick: obj.myNick,
+      msg: obj.msg,
+      sid: "rid" + obj.sid,
+    };
+    io.emit("newMessage", sendData);
+  });
 
   // 반응 주고 받기
   socket.on("quake", (data) => {
-    console.log(data);
+    console.log("quake", data);
     const obj = {
       first: data.reactID[0],
       second: data.reactID[1],
-      id: data.id,
+      id: data.rid,
     };
     io.emit("react", obj);
   });
@@ -67,10 +84,6 @@ io.on("connection", (socket) => {
     io.emit("react", reactID, target);
   });
 });
-const userNames = {};
-// 채팅방 대화 송수신
-//
-
 http.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
