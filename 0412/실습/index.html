@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./static/chat.css">
+  <style>
+    .list-item {
+      display: flex;
+      margin: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 0.16rem solid #fff8;
+      width: 100%;
+      height: 100%;
+      background-color: #ccc;
+      user-select: none;
+      cursor: pointer;
+      }
+
+    #chatList {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      }
+    .image {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      background-color: #fff;
+      font-size: 1rem;
+      text-align: center;
+      line-height: 5rem;
+      margin: 0 2rem;
+      }
+    .title > div {
+      margin: .3rem;
+      }
+    .add-list {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 50%;
+      background-color: #ed909090;
+      text-align: center;
+      line-height: 5rem;
+      font-size: 2rem;
+      margin: 0 2rem;
+      color: white;
+      cursor: pointer;
+      }
+
+  </style>
+</head>
+<body>
+<div id="root">
+  <div id="chatWrap">
+    <div id="chatHeader">
+      <h1>대화할 방을 선택 하세요.</h1>
+    </div>
+    <div id="chatList">
+
+      <div class="list-item">
+        <div class="image">image</div>
+        <div class="title">
+          <div class="member">현재 멤버 : test , 누구 </div>
+          <div class="last-message">
+            <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
+          </div>
+      </div>
+      </div>
+
+      <div class="list-item">
+        <div class="image">image</div>
+        <div class="title">
+          <div class="member">현재 멤버 : test , 누구 </div>
+          <div class="last-message">
+            <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
+          </div>
+      </div>
+    </div>
+
+      <div class="list-item">
+        <div class="image">image</div>
+        <div class="title">
+          <div class="member">현재 멤버 : test , 누구 </div>
+          <div class="last-message">
+            <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
+          </div>
+      </div>
+    </div>
+
+      <div class="list-item">
+        <div class="image">image</div>
+        <div class="title">
+          <div class="member">현재 멤버 : test , 누구 </div>
+          <div class="last-message">
+            <span> <strong>누구</strong> : 안녕하세요, 아무도 없나요 ? </span>
+          </div>
+      </div>
+    </div>
+
+      <div class="add-list"> + </div>
+
+  </div>
+</div>
+</div>
+  <script>
+    const listItem = document.querySelectorAll('.list-item');
+
+
+    //forEach 돌릴 것
+    listItem[0].addEventListener('click',function(){
+      document.location.href = './chat.html';
+    })
+
+    // 피드백 이벤트
+    listItem[0].addEventListener('mousedown',function(){
+      listItem[0].style.backgroundColor = '#ddd';
+    })
+    listItem[0].addEventListener('mouseup',function(){
+      listItem[0].style.backgroundColor = '#ccc';
+    })
+    listItem[0].addEventListener('mouseout',function(){
+      listItem[0].style.backgroundColor = '#ccc';
+    })
+  </script>
+</body>
+</html>

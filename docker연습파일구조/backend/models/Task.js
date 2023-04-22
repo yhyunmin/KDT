@@ -1,27 +1,27 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const db = require('../config/db');
-
-const Task = db.define('Task', {
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  createdDate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-  },
-  updatedDate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-  },
-});
-
-module.exports = Task;
+const Visitor = (Sequelize, DataTypes) => {
+  return Sequelize.define(
+    "todo",
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
+        type: DataTypes.STRING(10),
+        allowNull: false,
+      },
+      comment: {
+        type: DataTypes.TEXT("medium"),
+        allowNull: true,
+      },
+    },
+    {
+      tableName: "todo", // 실제 테이블 명
+      freezeTableName: true, // 테이블명 고정 !
+      timestamps: false, // 데이터가 추가/수정되는 시간을 컬럼으로 만들어서 기록
+    }
+  );
+};
+module.exports = Visitor;

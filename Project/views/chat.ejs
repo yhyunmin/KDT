@@ -372,6 +372,7 @@
           reactID:reactID,
           id:id,
           rid:target.id,
+          nick:this.parentNode.parentNode.querySelector('.nick').textContent
         }
         socket.emit('quake', data);
       })
@@ -381,12 +382,14 @@
         const id = e.target.id;
         const reactID = reactObj[id];
         const target = this.parentNode.parentNode.querySelector('.chat-box')
+
         console.log(target)
         // 태그의 고유값 보내기
         const data = {
           reactID:reactID,
           id:id,
           rid:target.id,
+          nick:this.parentNode.parentNode.querySelector('.nick').textContent
         }
         socket.emit('quake', data);
       })
@@ -403,6 +406,7 @@
           reactID:reactID,
           id:id,
           rid:target.id,
+          nick:this.parentNode.parentNode.querySelector('.nick').textContent
         }
         socket.emit('tada', data);
       })
@@ -419,6 +423,7 @@
           reactID:reactID,
           id:id,
           rid:target.id,
+          nick:this.parentNode.parentNode.querySelector('.nick').textContent
         }
         socket.emit('heartBeat', data);
       })
@@ -435,6 +440,7 @@
           reactID:reactID,
           id:id,
           rid:target.id,
+          nick:this.parentNode.parentNode.querySelector('.nick').textContent
         }
         socket.emit('rubber', data);
       })
@@ -451,6 +457,7 @@
           reactID:reactID,
           id:id,
           rid:target.id,
+          nick:this.parentNode.parentNode.querySelector('.nick').textContent
         }
         socket.emit('hinge', data);
       })
@@ -459,6 +466,8 @@
 
   let proceeding = false;
   socket.on('react', (data) => {
+    console.log('>>',data)
+
     const chatBox = document.querySelector('#' + data.id);
     // if (proceeding) return clearTimeout(removeReact);
     // const removeReact = setTimeout(function () {
@@ -470,7 +479,12 @@
     // chatBox.classList.remove(data.second);
     console.log('>>', data.first);
     // if (chatBox.contains(data.first)) chatBox.classList.toggle(data.first);
+
+    if (chatBox.classList.contains('my-chat')) {
     chatBox.setAttribute('class', "chat-box message my-chat");
+    } else {
+      chatBox.setAttribute('class', "chat-box message ur-chat");
+    }
     chatBox.classList.add(defaultReact, data.first);
     setTimeout(() => {
       chatBox.classList.remove(data.first);

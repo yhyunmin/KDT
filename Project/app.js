@@ -98,6 +98,7 @@ io.on("connection", (socket) => {
     const obj = {
       first: data.reactID,
       // second: data.reactID[1],
+      nick:data.nick,
       id: data.rid,
     };
     io.emit("react", obj);
@@ -107,6 +108,7 @@ io.on("connection", (socket) => {
     const obj = {
       first: data.reactID,
       // second: data.reactID[1],
+      nick:data.nick,
       id: data.rid,
     };
     io.emit("react", obj);
@@ -116,6 +118,7 @@ io.on("connection", (socket) => {
     const obj = {
       first: data.reactID,
       // second: data.reactID[1],
+      nick:data.nick,
       id: data.rid,
     };
     io.emit("react", obj);
@@ -125,6 +128,7 @@ io.on("connection", (socket) => {
     const obj = {
       first: data.reactID,
       // second: data.reactID[1],
+      nick:data.nick,
       id: data.rid,
     };
     io.emit("react", obj);
@@ -134,6 +138,7 @@ io.on("connection", (socket) => {
     const obj = {
       first: data.reactID,
       // second: data.reactID[1],
+      nick:data.nick,
       id: data.rid,
     };
     io.emit("react", obj);

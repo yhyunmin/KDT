@@ -84,7 +84,6 @@ function send() {
 
   document.querySelector("#message").value = ""; // 인풋 초기화
 }
-
 // [실습4] 채팅창 메세지 전송 Step2
 // 서버에 접속한 모든 클라이언트한테 "누가 뭐라고 말했는지" 이벤트 보내기
 socket.on("newMessage", (data) => {
