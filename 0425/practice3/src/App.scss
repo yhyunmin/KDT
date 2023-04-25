@@ -1,0 +1,48 @@
+@import '~include-media/dist/include-media';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$size200: 200px;
+$mobileSize: 532px;
+$tabletSize: 768px;
+
+@mixin imgSize() {
+  width: $size200;
+  height: $size200;
+}
+
+.App {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+img {
+  @include imgSize();
+  flex: 1 1 $size200;
+}
+
+//
+//@include media('width<=#{$mobileSize}') {
+//  .App {
+//    background-color: yellow;
+//  }
+//  img {
+//    flex: 1 0 ($mobileSize);
+//  }
+//}
+//
+@include media('width<=#{$tabletSize}') {
+  img {
+    flex :  1 1 $tabletSize/2;
+  }
+}
+
+@include media('width<=#{$mobileSize}') {
+  img {
+    display: block;
+    flex: 1 0 $mobileSize;
+  }
+}
