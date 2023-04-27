@@ -19,6 +19,7 @@ const App = () => {
     };
     getProducts();
   }, []);
+  console.log(products);
   return (
     <>
       <BrowserRouter>
@@ -30,7 +31,7 @@ const App = () => {
             element={<ProductPage products={products} />}
           />
           <Route
-            path="/products/:id"
+            path={`/products/:id`}
             element={<ProductDetailPage products={products} />}
           />
           <Route path="*" element={<NotFound />}></Route>
