@@ -1,5 +1,5 @@
 import "bulma/css/bulma.min.css";
-import "./App.css";
+import "./App.scss";
 import PostList from "./PostList";
 
 function App() {

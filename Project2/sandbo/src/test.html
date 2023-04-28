@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .cell {
+      background-color: #eee;
+      transition: background-color 0.5s;
+    }
+
+    .active {
+      background-color: #ffcc00;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid-container">
+    <div class="cell">13</div>
+    <div class="cell">13</div>
+    <div class="cell">13</div>
+    <div class="cell">1</div>
+    <div class="cell">13</div>
+    <div class="cell">23</div>
+  </div>
+
+  <script>
+    const cells = document.querySelectorAll('.cell');
+
+    cells.forEach(cell => {
+      cell.addEventListener('mouseenter', () => {
+        const activeCell = document.querySelector('.active');
+        if (activeCell) {
+          activeCell.classList.remove('active');
+        }
+        cell.classList.add('active');
+      });
+    });
+
+  </script>
+</body>
+
+</html>

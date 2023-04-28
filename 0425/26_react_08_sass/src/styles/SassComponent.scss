@@ -1,0 +1,103 @@
+@import './utils.scss';
+@import '~include-media/dist/include-media';
+// ~ 란 ? :node_modules 에서 라이브러리 디렉토리를 알아서 탐지 함.
+
+// scss 주석
+// 특징 1. 중첩 가능 (nesting)
+// : 요소간 부모 자식 표현이 쉬움
+
+// 특징 3. 변수 선언 " $ "
+// COLOR 변수
+$color-red: red;
+$color-orange: orange;
+$color-yellow: yellow;
+$color-green: green;
+$color-blue: blue;
+$color-indigo: indigo;
+$color-purple: purple;
+// Duration 변수
+$animation-duration: 0.4s;
+
+// 특징4. mixin 사용 (= 함수)
+// 믹스인을 정의할 때 ; @mixin 키워드를 사용
+// 믹스인을 사용 할 때 ; @include 키워드를 사용
+@mixin box($size) {
+  width: $size;
+  height: $size;
+}
+
+.SassComponent {
+  display: grid;
+  background-color: #ddd;
+  place-items: center;
+
+  .box {
+    @include box(100px);
+    //width: 100px;
+    //height: 100px;
+    //border: 1px solid black;
+    // 특징2. "&" 선택자 사용
+    // 부모 선택자를 참조하여 치환
+    &:hover {
+      // 지역변수 활용
+      $box-animation: $animation-duration * 2;
+      cursor: pointer;
+      transform: translateY(-20ox);
+      transition: transform $box-animation;
+    }
+
+    &.red {
+      //부모선택자(.box)의 .red
+    }
+
+    &.orange {
+      background-color: orange;
+    }
+
+    &.yellow {
+      background-color: yellow;
+    }
+
+    &.green {
+      background-color: green;
+    }
+
+    &.blue {
+      background-color: blue;
+    }
+
+    &.indigo {
+      background-color: indigo;
+    }
+
+    &.purple {
+      background-color: purple;
+    }
+
+  }
+}
+
+//
+//@media ( width < #{breakepoint-tablet}) {
+//  .SassComponent {
+//    display: flex;
+//    flex-direction: column;
+//  }
+//
+//}
+//
+//@media (max-width: #{$breakpoint-tablet}) {
+//  .SassComponent {
+//    display: flex;
+//    flex-direction: column;
+//  }
+//}
+
+
+//include-media 반응형을 쉽게 구현해줌.
+
+@include media('<#{$breakpoint-tablet}') {
+  .SassComponent {
+    flex-direction: column;
+  }
+}

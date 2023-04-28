@@ -9,8 +9,8 @@
 const Visitor = function (Sequelize, DataTypes) {
   console.log("*****", DataTypes.INTEGER);
   console.log("*****", DataTypes.STRING(10));
-  // Sequelize : models/index.js 에서 sequelize
-  // DataTypes :models/index.js 에서 Sequelize
+  // Sequelize : models/server 에서 sequelize
+  // DataTypes :models/server 에서 Sequelize
   //sequelize.define(param1,param2,param3)
   return Sequelize.define(
     "visitor", // param1 : 테이블 이름 설정

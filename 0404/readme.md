@@ -31,7 +31,7 @@
 * model 폴더 : 데이터 처리하는 부분
   (Comment.js)
 * routes 폴더 : 경로 설정하는 부분
-  (index.js)
+  (app.js)
 * views 폴더 : UI 관련 처리
 
 

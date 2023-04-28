@@ -1,0 +1,29 @@
+@import './util.scss';
+
+.container {
+  //display: grid;
+  //place-items: center;
+  height: 100vh;
+
+  & .square {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transition: all 1s linear;
+  }
+}
+
+.pink {
+  background-color: $color_pink;
+  @include move10($move_10);
+}
+
+.green {
+  background-color: $color_green;
+  @include move30($move_30);
+}
+
+.yellow {
+  background-color: $color_yellow;
+  @include move20($move_20);
+}

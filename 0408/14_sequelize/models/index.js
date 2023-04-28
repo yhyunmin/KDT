@@ -1,4 +1,4 @@
-//  models/index.js
+//  models/server
 // sequelize-cli 자동 생성한 코드
 const Sequelize = require("sequelize"); //
 const config = require(__dirname + "/../config/config.json")["development"];
